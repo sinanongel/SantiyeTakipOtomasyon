@@ -1,0 +1,19 @@
+﻿@model SantiyeTakipOtomasyon.Models.Siniflar.TedarikTur
+
+<div class="container p-2 bg-dark text-white">   
+    <form class="form-group" action="@Url.Action("TedarikTurEkle", "TedarikTur")" method="post">
+        <div class="modal-header">
+            <h5 class="modal-title">Tedarik Tür Girişi</h5>
+        </div>
+        <br />
+        <div class="form-inline">
+            <label class="control-label col-sm-5">Tedarik Türü</label>
+            <input style="width:200px;" type="text" class="form-control" name="TurAd" />
+        </div>
+        <br />        
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
+            <button class="btn btn-info">Ekle</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,122 @@
+﻿@model SantiyeTakipOtomasyon.Models.Siniflar.FaturaFaturaDetay
+
+<form id="NewOrderForm">
+    <div class="modal-body">
+        @*Fatura Bilgileri*@
+
+        <h5 style="color:#ff6347">Fatura Bilgileri</h5>
+        <hr />
+        <div>
+            @*<input type="hidden" id="FaturaId" />
+            <div class="container form-group row">
+                <label class="col-form-label col-md-3 text-right"><b>Fatura Seri/Sıra No</b></label>
+                <div class="col-md-1">
+                    @Html.TextBoxFor(x => x, new { @class = "form-control", @style = "width:50px;" })
+                </div>
+                <div class="col-md-1">
+                    @Html.TextBoxFor(x => x.FatSiraNo, new { @class = "form-control", @style = "width:80px;" })
+                </div>
+                <label class="col-form-label col-md-2 text-right"><b>Fatura Tarihi</b></label>
+                <div class="col-md-5">
+                    <input style="width:160px;" type="date" class="form-control" name="FatTarihi" id="FatTarihi" />
+                </div>
+            </div>
+            <div class="container form-group row">
+                <label class="col-form-label col-md-3 text-right"><b>Firma/Şahıs</b></label>
+                <div class="col-md-3">
+                    @Html.DropDownList("selection1", (List<SelectListItem>)ViewBag.tList, "----------------------- Seçiniz ----------------------", new { @class = "form-control", @style = "width:400px", @name = "TedarikciId", @id = "TedarikciId" })
+                </div>
+                <label class="col-form-label col-md-3 text-right"><b>Ödeme Türü</b></label>
+                <div class="col-md-3">
+                    @Html.DropDownList("selection2", (List<SelectListItem>)ViewBag.oList, "---- Seçiniz ----", new { @class = "form-control", @style = "width:150px", @name = "OdemeSekliId", @id = "OdemeSekliId" })
+                </div>
+            </div>
+            <div class="container form-group row">
+                <label class="col-form-label col-md-3 text-right"><b>Fatura Toplamı</b></label>
+                <div class="col-md-1">
+                    <input style="width:115px; text-align:right;" type="number" class="form-control" name="FatToplami" id="FatToplami" readonly />
+                </div>
+                <label class="col-form-label col-md-2 text-right"><b>Kdv Toplamı</b></label>
+                <div class="col-md-1">
+                    <input style="width:115px; text-align:right;" type="number" class="form-control" name="FatKdvToplami" id="FatKdvToplami" readonly />
+                </div>
+                <label class="col-form-label col-md-2 text-right"><b>Ödenecek Tutar</b></label>
+                <div class="col-md-3">
+                    <input style="width:115px;  text-align:right;" type="number" class="form-control" name="FatOdenecekTutar" id="FatOdenecekTutar" readonly />
+                </div>
+            </div>*@
+        </div>
+
+
+        @*Fatura Detayları*@
+
+        <h5 style="margin-top:10px;color:#ff6347">Fatura Detayları</h5>
+        <hr />
+        <div class="form-horizontal">
+            <input type="hidden" id="id" />
+            <div class="container form-group row">
+                <label class="col-form-label col-md-2 text-right"><b>Mal/Hizmet</b></label>
+                <div class="col-md-3">
+                    <input type="text" id="FdCinsi" name="FdCinsi" placeholder="Mal/Hizmet Açıklamasını Giriniz" class="form-control" style="width:400px;" />
+                </div>
+                <label class="col-form-label col-md-3 text-right"><b>Miktar</b></label>
+                <div class="col-md-1">
+                    <input type="text" id="FdMiktar" name="FdMiktar" placeholder="Miktar" class="form-control" style="width:70px; text-align:right" />
+                </div>
+                <div class="col-md-3">
+                    @Html.DropDownList("selection3", (List<SelectListItem>)ViewBag.bList, new { @class = "form-control", @style = "width:100px", @name = "BirimId", @id = "BirimId" })
+                </div>
+            </div>
+            <div class="container form-group row">
+                <label class="col-form-label col-md-2 text-right"><b>Birim Fiyat</b></label>
+                <div class="col-md-1">
+                    <input type="number" step="0.01" id="FdBirimFiyat" name="FdBirimFiyat" placeholder="Birim Fiyat" class="form-control" style="width:100px; text-align:right;" />
+                </div>
+                <label class="col-form-label col-md-2 text-right"><b>Döviz Cinsi</b></label>
+                <div class="col-md-1">
+                    @Html.DropDownList("selection5", (List<SelectListItem>)ViewBag.dList, new { @class = "form-control", @style = "width:90px", @name = "DovizId", @id = "DovizId" })
+                </div>
+                <label class="col-form-label col-md-1 text-right"><b>Kur</b></label>
+                <div class="col-md-1">
+                    <input style="width:80px; text-align:right;" type="number" step="0.01" class="form-control" name="FdKur" id="FdKur" value="1,00" />
+                </div>
+                <label class="col-form-label col-md-2 text-right"><b>Kdv Oranı(%)</b></label>
+                <div class="col-md-2">
+                    @Html.DropDownList("selection4", (List<SelectListItem>)ViewBag.kList, new { @class = "form-control", @style = "width:80px", @name = "KdvId", @id = "KdvId" })
+                </div>
+            </div>
+            <div class="container">
+                <div class="row justify-content-end">
+                    <div class="col-2">
+                        <a id="addToList" class="btn btn-primary text-white">Listeye Ekle</a>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+            </div>
+            <br />
+            <table id="detailsTable" class="table">
+                <thead>
+                    <tr>
+                        <th style="width:30%">Mal/Hizmet</th>
+                        <th style="width:10%">Miktar</th>
+                        <th style="width:10%">Birim</th>
+                        <th style="width:25%">Birim Fiyat</th>
+                        <th style="width:10%">Döviz Cinsi</th>
+                        <th style="width:10%">Kur</th>
+                        <th style="width:25%">Birim Fiyat(TL)</th>
+                        <th style="width:10%">Kdv Oranı(%)</th>
+                        <th style="width:25%">Kdv Tutarı</th>
+                        <th style="width:25%">Tutar</th>
+                        <th style="width:10%"></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="reset" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+        <button id="saveOrder" type="submit" class="btn btn-danger">Kaydet</button>
+    </div>
+</form>

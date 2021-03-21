@@ -1,0 +1,119 @@
+﻿@model SantiyeTakipOtomasyon.Models.Siniflar.Proje
+
+<div class="card card-default">
+    <div class="card-header bg-dark">
+        <div class="row">
+            <h5 class="card-title mb-sm-1 col-md-11" style="color:white">
+                <strong>Proje Girişi</strong>
+            </h5>
+        </div>
+    </div>
+    <div class="container">
+        <form action="@Url.Action("ProjeEkle", "Proje")" method="post">
+            <hr />
+            <div class="form-horizontal">
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-2 text-right"><b>Proje Adı</b></label>
+                    <div class="col-md-3">
+                        <input type="text" id="ProAdi" name="ProAdi" placeholder="Proje Adını Giriniz" class="form-control" style="width:200%;" />
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-2 text-right"><b>Proje Adresi</b></label>
+                    <div class="col-md-3">
+                        <input type="text" id="ProAdres" name="ProAdres" placeholder="Proje Adresini Giriniz" class="form-control" style="width:200%;" />
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-2 text-right"><b>İl/İlçe</b></label>
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(x => x.IllerId, (List<SelectListItem>)ViewBag.iList, "------- Seçiniz -------", new { @class = "form-control", @style = "width:90%" })
+                    </div>
+                    <div class="col-md-7">
+                        @Html.DropDownListFor(x => x.IlcelerId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control", @style = "width:45%" })
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-2 text-right"><b>Müşavir</b></label>
+                    <div class="col-md-3">
+                        <input type="text" id="ProMusavir" name="ProMusavir" placeholder="Müşavir Adını Giriniz" class="form-control" style="width:200%;" />
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-2 text-right"><b>Yapı Denetim</b></label>
+                    <div class="col-md-3">
+                        <input type="text" id="ProYapiDenetim" name="ProYapiDenetim" placeholder="Yapı Denetim Firmasını Giriniz" class="form-control" style="width:200%;" />
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-2 text-right"><b>Sözleşme Tarihi</b></label>
+                    <div class="col-md-2">
+                        <input type="date" id="ProSozlesmeTarihi" name="ProSozlesmeTarihi" class="form-control" style="width:110%;" />
+                    </div>
+                    <label class="col-form-label-sm col-md-2 text-right"><b>Yer Teslim Tarihi</b></label>
+                    <div class="col-md-2">
+                        <input type="date" id="ProYerTeslimTarihi" name="ProYerTeslimTarihi" class="form-control" style="width:110%;" />
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-2 text-right"><b>İşe Başlama Tarihi</b></label>
+                    <div class="col-md-2">
+                        <input type="date" id="ProIseBaslamaTarihi" name="ProIseBaslamaTarihi" class="form-control" style="width:110%;" />
+                    </div>
+                    <label class="col-form-label-sm col-md-2 text-right"><b>İşin Bitiş Tarihi</b></label>
+                    <div class="col-md-2">
+                        <input type="date" id="ProIsinBitisTarihi" name="ProIseBitisTarihi" class="form-control" style="width:110%;" />
+                    </div>
+                    <label class="col-form-label-sm col-md-2 text-right"><b>Sözleşme Süresi</b></label>
+                    <div class="col-md-2">
+                        <input type="text" id="ProSozlesmeSuresi" name="ProSozlesmeSuresi" class="form-control" style="width:60%; text-align:right" />
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-2 text-right"><b>Sözleşme Bedeli</b></label>
+                    <div class="col-md-2">
+                        <input type="text" id="ProSozlesmeBedeli" name="ProSozlesmeBedeli" class="form-control" style="width:100%; text-align:right" />
+                    </div>
+                    <label class="col-form-label-sm col-md-2 text-right"><b>Proje Durumu</b></label>
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(x => x.ProDurumId, (List<SelectListItem>)ViewBag.dList, "----- Seçiniz -----", new { @class = "form-control", @style = "width:130%" })
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
+                    <button class="btn btn-info">Ekle</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#IllerId').change(function () {
+            var IlId = $(this).val();
+            var IlceL = $('#IlcelerId');
+            IlceL.empty();
+            $.ajax({
+                url: '@Url.Action("IlceListe","Tedarikci")',
+                type: 'POST',
+                dataType: 'json',
+                data: { 'IlId': IlId },
+                success: function (data) {
+                    $.each(data, function (index, option) {
+                        IlceL.append('<option value=' + option.Value + '>' + option.Text + '</option>');
+                    });
+                }
+            });
+        });
+    });
+</script>
+

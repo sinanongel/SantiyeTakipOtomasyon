@@ -1,0 +1,104 @@
+﻿@using SantiyeTakipOtomasyon.Models.Siniflar
+@model List<FaturaDetay>
+
+<h1 class="mt-4">Fatura Detay Listesi</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Fatura Seri-Sıra No: @ViewBag.FSeri  @ViewBag.FSira</li>
+    <li class="breadcrumb-item active">Fatura Tarihi: @ViewBag.FaturaTarihi</li>
+    <li class="breadcrumb-item active">Firma: @ViewBag.FirmaAd</li>
+</ol>
+<div class="row">
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-primary text-white mb-1">
+            <div class="card-body text-white">
+                <p class="card-text">Fatura Seri-Sıra No: @ViewBag.FSeri  @ViewBag.FSira</p>
+                <p class="card-text">Fatura Tarihi: @ViewBag.FaturaTarihi</p>
+                <p class="card-text">Firma: @ViewBag.FirmaAd</p>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<table class="table table-hover">
+    <tr class="warning">
+        <th>ID</th>
+        <th>AÇIKLAMA</th>
+        <th>BİRİM</th>
+        <th>MİKTAR</th>
+        <th>BİRİM FİYAT</th>
+        <th>TUTAR</th>
+        <th>GÜNCELLE</th>
+    </tr>
+    @foreach (var f in Model)
+    {
+        <tr>
+            <td>@f.FaturaDetayId</td>
+            <td>@f.FdCinsi</td>
+            <td>@f.Birim.BirimId</td>
+            <td>@f.FdMiktar</td>
+            <td>@f.FdBirimFiyat</td>
+            <td>@f.FdTutar</td>
+            <td><a href="@Url.Action("FaturaDetaySil", "Fatura")/@f.FaturaDetayId" class="btn btn-danger">Sil</a></td>
+            <td><a href="#" class="btn btn-success guncelle" data-target="@Url.Action("FaturaDetayGetir", "Fatura")/@f.FaturaId">Güncelle</a></td>
+        </tr>
+    }
+</table>
+<a href="#" class="btn btn-primary ekle" data-target="@Url.Action("ModalFaturaDetayAc", "Fatura")">Yeni Kayıt</a>
+
+
+<div class="container">
+    <!--Modal-->
+    <div class="modal fade" id="myModalE" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <!--Modal-->
+    <div class="modal fade" id="myModalG" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("body").on("click", ".ekle", function () {
+            var url = $(this).data("target");
+            $.post(url, function (data) { })
+                .done(function (data) {
+                    $("#myModalE .modal-body").html(data);
+                    $("#myModalE").modal("show");
+                })
+                .fail(function () {
+                    $("#myModalE .modal-body").text("Hata!!");
+                    $("#myModalE").modal("show");
+                })
+        });
+    });
+    $(function () {
+        $("body").on("click", ".guncelle", function () {
+            var url = $(this).data("target");
+            $.post(url, function (data) { })
+                .done(function (data) {
+                    $("#myModalG .modal-body").html(data);
+                    $("#myModalG").modal("show");
+                })
+                .fail(function () {
+                    $("#myModalG .modal-body").text("Hata!!");
+                    $("#myModalG").modal("show");
+                })
+        });
+    });
+</script>
+

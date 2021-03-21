@@ -1,0 +1,23 @@
+﻿@model SantiyeTakipOtomasyon.Models.Siniflar.TedarikTur
+<div class="container p-2 bg-dark text-white">
+    @using (Html.BeginForm("TedarikTurGuncelle", "TedarikTur", FormMethod.Post))
+    {
+        <div class="modal-header">
+            <h5 class="modal-title">Tedarik Tür Güncelleme</h5>
+        </div>
+        <br />
+        @Html.HiddenFor(x => x.TedarikTurId)
+        <div class="form-group form-inline">
+            @Html.LabelFor(x => x.TurAd, "Tür Adı", new { @class = "col-4 control-label" })
+            <div class="col-8">
+                @Html.TextBoxFor(x => x.TurAd, new { @class = "form-control", @style = "width:200px" })
+            </div>
+            <br />
+        </div>
+        <br />
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
+            <button class="btn btn-success">Güncelle</button>
+        </div>
+    }
+</div>

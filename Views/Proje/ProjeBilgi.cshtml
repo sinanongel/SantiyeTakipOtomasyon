@@ -1,0 +1,118 @@
+﻿@model SantiyeTakipOtomasyon.Models.Siniflar.Proje
+
+<div class="card card-default">
+    <div class="card-header bg-dark">
+        <div class="row">
+            <h5 class="card-title mb-sm-1 col-md-11" style="color:white">
+                <strong>Proje Girişi</strong>
+            </h5>
+        </div>
+    </div>
+    <div class="container">
+        <hr />
+        @Html.HiddenFor(x => x.ProjeId)
+        <div class="form-horizontal">
+            <div class="container form-group-sm row">
+                <label class="col-form-label-sm col-md-2 text-right"><b>Proje Bilgi :</b></label>
+                <div class="col-form-label-sm col-md-10">
+                    @ViewBag.ProAdi
+                </div>
+            </div>
+            <br />
+            <div class="container form-group-sm row">
+                <label class="col-form-label-sm col-md-2 text-right"><b>Proje Adresi</b></label>
+                <div class="col-form-label-sm col-md-10">
+                    @ViewBag.ProAdres @ViewBag.Ilce/@ViewBag.Sehir
+                </div>
+            </div>
+            <br />
+            <div class="container form-group-sm row">
+                <label class="col-form-label-sm col-md-2 text-right"><b>Müşavir</b></label>
+                <div class="col-form-label-sm col-md-10">
+                    @ViewBag.ProMusavir
+                </div>
+            </div>
+            <br />
+            <div class="container form-group-sm row">
+                <label class="col-form-label-sm col-md-2 text-right"><b>Yapı Denetim</b></label>
+                <div class="col-form-label-sm col-md-10">
+                    @ViewBag.ProYapiDenetim
+                </div>
+            </div>
+            <hr />
+            <div class="container form-group-sm row">
+                <label class="col-form-label-sm col-md-2 text-right"><b>Sözleşme Tarihi</b></label>
+                <div class="col-form-label-sm col-md-2">
+                    @ViewBag.ProSozlesmeTarihi.ToString("dd.MM.yyyy")
+                </div>
+                <label class="col-form-label-sm col-md-2 text-right"><b>Yer Teslim Tarihi</b></label>
+                <div class="col-form-label-sm col-md-2">
+                    @ViewBag.ProYerTeslimTarihi.ToString("dd.MM.yyyy")
+                </div>
+            </div>
+            <br />
+            <div class="container form-group-sm row">
+                <label class="col-form-label-sm col-md-2 text-right"><b>İşe Başlama Tarihi</b></label>
+                <div class="col-form-label-sm col-md-2">
+                    @ViewBag.ProIseBaslamaTarihi.ToString("dd.MM.yyyy")
+                </div>
+                <label class="col-form-label-sm col-md-2 text-right"><b>İşin Bitiş Tarihi</b></label>
+                <div class="col-form-label-sm col-md-2">
+                    @ViewBag.ProIsinBitisTarihi.ToString("dd.MM.yyyy")
+                </div>
+                <label class="col-form-label-sm col-md-3 text-right"><b>Sözleşme Süresi</b></label>
+                <div class="col-form-label-sm col-md-1">
+                    @ViewBag.ProSozlesmeSuresi
+                </div>
+            </div>
+            <hr />
+            <div class="container form-group-sm row">
+                <label class="col-form-label-sm col-md-2 text-right"><b>Sözleşme Bedeli</b></label>
+                <div class="col-form-label-sm col-md-3">
+                    @ViewBag.ProSozlesmeBedeli.ToString("N")<span> TL</span>
+                </div>
+                <label class="col-form-label-sm col-md-2 text-right"><b>Proje Durumu</b></label>
+                <div class="col-form-label-sm col-md-3">
+                    @ViewBag.ProDurum
+                </div>
+            </div>
+            <hr />
+            <div class="container form-group-sm row">
+                <label class="col-form-label-sm col-md-2 text-right"><b>Süre Uzatımı 1</b></label>
+                <div class="col-form-label-sm col-md-3">
+                    @ViewBag.ProSureUzatimi1
+                </div>
+                <label class="col-form-label-sm col-md-2 text-right"><b>Keşif Artışı 1</b></label>
+                <div class="col-form-label-sm col-md-3">
+                    @ViewBag.ProKesifArtisi1.ToString("N")<span> TL</span>
+                </div>
+            </div>
+            <div class="container form-group-sm row">
+                <label class="col-form-label-sm col-md-2 text-right"><b>Süre Uzatımı 2</b></label>
+                <div class="col-form-label-sm col-md-3">
+                    @ViewBag.ProSureUzatimi2
+                </div>
+                <label class="col-form-label-sm col-md-2 text-right"><b>Keşif Artışı 2</b></label>
+                <div class="col-form-label-sm col-md-3">
+                    @ViewBag.ProKesifArtisi2.ToString("N")<span> TL</span>
+                </div>
+            </div>
+            <div class="container form-group-sm row">
+                <label class="col-form-label-sm col-md-2 text-right"><b>Süre Uzatımı 3</b></label>
+                <div class="col-form-label-sm col-md-3">
+                    @ViewBag.ProSureUzatimi3
+                </div>
+                <label class="col-form-label-sm col-md-2 text-right"><b>Keşif Artışı 3</b></label>
+                <div class="col-form-label-sm col-md-3">
+                    @ViewBag.ProKesifArtisi3.ToString("N")<span> TL</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

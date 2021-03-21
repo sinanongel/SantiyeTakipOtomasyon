@@ -1,0 +1,98 @@
+﻿@model SantiyeTakipOtomasyon.Models.Siniflar.Personel
+
+<div class="card card-default">
+    <div class="card-header bg-dark">
+        <div class="row">
+            <h5 class="card-title mb-sm-1 col-md-11" style="color:white">
+                <strong>Personel Giriş</strong>
+            </h5>
+        </div>
+    </div>
+    <div class="container">
+        <form action="@Url.Action("PersonelEkle", "Personel")" method="post">
+            <hr />
+            <input hidden id="ProjeId" name="ProjeId" value="@ViewBag.projeId" />
+            <div class="form-horizontal">
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right"><b>Adı</b></label>
+                    <div class="col-md-3">
+                        <input type="text" id="PerAd" name="PerAd" placeholder="Personel Adını Giriniz" class="form-control" style="width:200%;" />
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right"><b>Soyadı</b></label>
+                    <div class="col-md-3">
+                        <input type="text" id="PerSoyad" name="PerSoyad" placeholder="Personel Soyadını Giriniz" class="form-control" style="width:200%;" />
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right"><b>Adres</b></label>
+                    <div class="col-md-3">
+                        <input type="text" id="PerAdres" name="PerAdres" placeholder="Adres Bilgilerini Giriniz" class="form-control" style="width:200%;" />
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right"><b>İl/İlçe</b></label>
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(x => x.IllerId, (List<SelectListItem>)ViewBag.iList, "------- Seçiniz -------", new { @class = "form-control", @style = "width:100%" })
+                    </div>
+                    <div class="col-md-5">
+                        @Html.DropDownListFor(x => x.IlcelerId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control", @style = "width:95%" })
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right"><b>Telefon</b></label>
+                    <div class="col-md-3">
+                        <input type="text" id="PerTelefon" name="PerTelefon" placeholder="Telefonu Giriniz" class="form-control" style="width:100%;" />
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right"><b>İşe Giriş Tarihi</b></label>
+                    <div class="col-md-2">
+                        <input type="date" id="PerIseGirisTarihi" name="PerIseGirisTarihi" class="form-control" style="width:180%;" />
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right"><b>Görevi</b></label>
+                    <div class="col-md-2">
+                        <input type="text" id="PerGorev" name="PerGorev" class="form-control" style="width:300%;" />
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
+                    <button class="btn btn-info">Ekle</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#IllerId').change(function () {
+            var IlId = $(this).val();
+            var IlceL = $('#IlcelerId');
+            IlceL.empty();
+            $.ajax({
+                url: '@Url.Action("IlceListe","Personel")',
+                type: 'POST',
+                dataType: 'json',
+                data: { 'IlId': IlId },
+                success: function (data) {
+                    $.each(data, function (index, option) {
+                        IlceL.append('<option value=' + option.Value + '>' + option.Text + '</option>');
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+

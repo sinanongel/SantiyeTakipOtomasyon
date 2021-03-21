@@ -1,0 +1,42 @@
+﻿@*@model SantiyeTakipOtomasyon.Models.Siniflar.Fatura
+<div class="container p-2 bg-dark text-white">
+    <form action="@Url.Action("FaturaEkle", "Fatura")" method="post">
+        <div class="modal-header">
+            <h5 class="modal-title">Fatura Girişi</h5>
+        </div>
+        <br />
+        <div style="margin-left:70px">
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label" st>Fatura Seri/Sıra No</label>
+                <div class="col-sm-1">
+                    <input style="width:50px;" type="text" class="form-control" name="FatSeri" />
+                </div>
+                <div class="col-sm-8">
+                    <input style="width:75px;" type="text" class="form-control" name="FatSiraNo" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Fatura Tarihi</label>
+                <div class="col-sm-9">
+                    <input style="width:160px;" type="date" class="form-control" name="FatTarihi" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Firma/Şahıs</label>
+                <div class="col-sm-9">
+                    @Html.DropDownListFor(x => x.TedarikciId, (List<SelectListItem>)ViewBag.tList, "----------------------- Seçiniz ----------------------", new { @class = "form-control", @style = "width:400px" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Ödeme Şekli</label>
+                <div class="col-sm-9">
+                    @Html.DropDownListFor(x => x.OdemeSekliId, (List<SelectListItem>)ViewBag.oList, "---- Seçiniz ----", new { @class = "form-control", @style = "width:150px" })
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
+            <button class="btn btn-info">Ekle</button>
+        </div>
+    </form>
+</div>*@

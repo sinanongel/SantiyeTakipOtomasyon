@@ -1,0 +1,40 @@
+﻿@model SantiyeTakipOtomasyon.Models.Siniflar.Proje
+
+<div class="card card-default">
+    <div class="card-header bg-dark">
+        <div class="row">
+            <h5 class="card-title mb-sm-1 col-md-11" style="color:white">
+                <strong>Proje Seçimi</strong>
+            </h5>
+        </div>
+    </div>
+    <br />
+    <div class="container">
+        <div class="form-horizontal">
+            <div class="container form-group-sm row">
+                <label class="col-form-label-sm col-md-2 text-right"><b>Proje Adı</b></label>
+                <div class="col-md-3">
+                    @Html.DropDownList("selection", (List<SelectListItem>)ViewBag.pList, "----------------------- Seçiniz ----------------------", new { @class = "form-control", @style = "width:400px", @name = "ProjeId", @id = "ProjeId" })
+                </div>
+            </div>
+            <br />
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
+                <button id="Sec" class="btn btn-info">Seç</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#Sec').on('click', function (e) {
+            e.preventDefault();
+
+            var ProId = $("#ProjeId").val();
+            var url = '@Url.Action("FaturaDinamik", "Fatura")/' + ProId;
+            alert(url);
+            window.location.href = url;
+        });
+    });
+</script>

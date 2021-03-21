@@ -1,0 +1,151 @@
+﻿@model SantiyeTakipOtomasyon.Models.Siniflar.Proje
+
+<div class="card card-default">
+    <div class="card-header bg-dark">
+        <div class="row">
+            <h5 class="card-title mb-sm-1 col-md-11" style="color:white">
+                <strong>Proje Güncelleme</strong>
+            </h5>
+        </div>
+    </div>
+    <div class="container">
+        <form action="@Url.Action("ProjeGuncelle", "Proje")" method="post">
+            <hr />
+            @Html.HiddenFor(x => x.ProjeId)
+            <div class="form-horizontal">
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-2 text-right"><b>Proje Adı</b></label>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(x => x.ProAdi, new { @class = "form-control", @style = "width:200%;" })
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-2 text-right"><b>Proje Adresi</b></label>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(x => x.ProAdres, new { @class = "form-control", @style = "width:200%;" })
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-2 text-right"><b>İl/İlçe</b></label>
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(x => x.IllerId, (List<SelectListItem>)ViewBag.iList, new { @class = "form-control", @style = "width:90%" })
+                    </div>
+                    <div class="col-md-7">
+                        @Html.DropDownListFor(x => x.IlcelerId, (List<SelectListItem>)ViewBag.ilcList, new { @class = "form-control", @style = "width:45%" })
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-2 text-right"><b>Müşavir</b></label>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(x => x.ProMusavir, new { @class = "form-control", @style = "width:200%;" })
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-2 text-right"><b>Yapı Denetim</b></label>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(x => x.ProYapiDenetim, new { @class = "form-control", @style = "width:200%;" })
+                    </div>
+                </div>
+                <hr />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-2 text-right"><b>Sözleşme Tarihi</b></label>
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(x => x.ProSozlesmeTarihi, "{0:yyyy-MM-dd}", new { @class = "form-control", @style = "width:110%;", @type = "date" })
+                    </div>
+                    <label class="col-form-label-sm col-md-2 text-right"><b>Yer Teslim Tarihi</b></label>
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(x => x.ProYerTeslimTarihi, "{0:yyyy-MM-dd}", new { @class = "form-control", @style = "width:110%;", @type = "date" })
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-2 text-right"><b>İşe Başlama Tarihi</b></label>
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(x => x.ProIseBaslamaTarihi, "{0:yyyy-MM-dd}", new { @class = "form-control", @style = "width:110%;", @type = "date" })
+                    </div>
+                    <label class="col-form-label-sm col-md-2 text-right"><b>İşin Bitiş Tarihi</b></label>
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(x => x.ProIsinBitisTarihi, "{0:yyyy-MM-dd}", new { @class = "form-control", @style = "width:110%;", @type = "date" })
+                    </div>
+                    <label class="col-form-label-sm col-md-2 text-right"><b>Sözleşme Süresi</b></label>
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(x => x.ProSozlesmeSuresi, new { @class = "form-control", @style = "width:75%; text-align:right;" })
+                    </div>
+                </div>
+                <hr />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-2 text-right"><b>Sözleşme Bedeli(TL)</b></label>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(x => x.ProSozlesmeBedeli, "{0:N}", new { @class = "form-control sozBedel", @style = "width:100%; text-align:right;", @onkeydown = "bedel" })
+                    </div>
+                    <label class="col-form-label-sm col-md-2 text-right"><b>Proje Durumu</b></label>
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(x => x.ProDurumId, (List<SelectListItem>)ViewBag.dList, new { @class = "form-control", @style = "width:130%" })
+                    </div>
+                </div>
+                <hr />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-2 text-right"><b>Süre Uzatımı 1</b></label>
+                    <div class="col-form-label-sm col-md-3">
+                        @Html.TextBoxFor(x => x.ProSureUzatimi1, new { @class = "form-control", @style = "width:100%; text-align:right;" })
+                    </div>
+                    <label class="col-form-label-sm col-md-2 text-right"><b>Keşif Artışı 1</b></label>
+                    <div class="col-form-label-sm col-md-3">
+                        @Html.TextBoxFor(x => x.ProKesifArtisi1, new { @class = "form-control", @style = "width:100%; text-align:right;" })
+                    </div>
+                </div>
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-2 text-right"><b>Süre Uzatımı 2</b></label>
+                    <div class="col-form-label-sm col-md-3">
+                        @Html.TextBoxFor(x => x.ProSureUzatimi2, new { @class = "form-control", @style = "width:100%; text-align:right;" })
+                    </div>
+                    <label class="col-form-label-sm col-md-2 text-right"><b>Keşif Artışı 2</b></label>
+                    <div class="col-form-label-sm col-md-3">
+                        @Html.TextBoxFor(x => x.ProKesifArtisi2, new { @class = "form-control", @style = "width:100%; text-align:right;" })
+                    </div>
+                </div>
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-2 text-right"><b>Süre Uzatımı 3</b></label>
+                    <div class="col-form-label-sm col-md-3">
+                        @Html.TextBoxFor(x => x.ProSureUzatimi3, new { @class = "form-control", @style = "width:100%; text-align:right;" })
+                    </div>
+                    <label class="col-form-label-sm col-md-2 text-right"><b>Keşif Artışı 3</b></label>
+                    <div class="col-form-label-sm col-md-3">
+                        @Html.TextBoxFor(x => x.ProKesifArtisi3, new { @class = "form-control", @style = "width:100%; text-align:right;" })
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
+                    <button class="btn btn-success">Güncelle</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#IllerId').change(function () {
+            var IlId = $(this).val();
+            var IlceL = $('#IlcelerId');
+            IlceL.empty();
+            $.ajax({
+                url: '@Url.Action("IlceListe","Proje")',
+                type: 'POST',
+                dataType: 'json',
+                data: { 'IlId': IlId },
+                success: function (data) {
+                    $.each(data, function (index, option) {
+                        IlceL.append('<option value=' + option.Value + '>' + option.Text + '</option>');
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+

@@ -1,0 +1,88 @@
+﻿@model SantiyeTakipOtomasyon.Models.Siniflar.PersonelIzin
+
+<div class="card card-default">
+    <div class="card-header bg-dark">
+        <div class="row">
+            <h5 class="card-title mb-sm-1 col-md-11" style="color:white">
+                <strong>İzin Giriş</strong>
+            </h5>
+        </div>
+    </div>
+    <div class="container">
+        <form action="@Url.Action("PersonelIzinEkle", "Personel")" method="post">
+            <hr />
+            <input hidden id="PersonelId" name="PersonelId" value="@ViewBag.personelId" />
+            <div class="form-horizontal">
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-5 text-right"><b>İzin Türü</b></label>
+                    <div class="col-md-7">
+                        @Html.DropDownListFor(x => x.IzinTuruId, (List<SelectListItem>)ViewBag.tList, "-- Seçiniz --", new { @class = "form-control", @style = "width:70%" })
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-5 text-right"><b>İzin Başlangıç Tarihi</b></label>
+                    <div class="col-md-7">
+                        <input type="date" id="IzinBaslangicTarihi" name="IzinBaslangicTarihi" class="form-control izBasTar" style="width:80%;" />
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-5 text-right"><b>İzin Bitiş Tarihi</b></label>
+                    <div class="col-md-7">
+                        <input type="date" id="IzinBitisTarihi" name="IzinBitisTarihi" class="form-control izBitTar" style="width:80%;" />
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-5 text-right izSure"><b>İzin Süresi</b></label>
+                    <div class="col-md-7">
+                        <input type="text" id="IzinSuresi" name="IzinSuresi" class="form-control izSure" style="width:40%;" />
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-5 text-right izSure"><b>Açıklama</b></label>
+                    <div class="col-md-7">
+                        <input type="text" id="IzinAciklama" name="IzinAciklama" class="form-control" style="width:100%;" />
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
+                    <button class="btn btn-info">Ekle</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function (){
+        $('.izBitTar').change(function () {
+            var iBitTarihi = $(this).val();
+            var iBasTarihi = $('.izBasTar').val();
+            var izSure = 0;
+            var PersonelIzins = {
+                IzinBaslangicTarihi: iBasTarihi,
+                IzinBitisTarihi: iBitTarihi
+            };
+            $.ajax({
+                url: "@Url.Action("Hesaplama","Personel")",
+                type: 'POST',
+                dataType: 'json',
+                data: { 'izin': PersonelIzins },
+                success: function (sonuc) {
+                    izSure = sonuc;
+                    $(".izSure").val(izSure);
+                },
+                error: function (errormessage) {
+
+                }
+            });
+        });
+    });
+</script>
+
+
+
