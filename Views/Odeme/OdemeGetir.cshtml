@@ -1,0 +1,60 @@
+﻿@model SantiyeTakipOtomasyon.Models.Siniflar.Odeme
+
+<div class="card card-default">
+    <div class="card-header bg-dark">
+        <div class="row">
+            <h5 class="card-title mb-sm-1 col-md-11" style="color:white">
+                <strong>Ödeme Güncelleme</strong>
+            </h5>
+        </div>
+    </div>
+    <div class="container">
+        <form action="@Url.Action("OdemeGuncelle", "Odeme")" method="post">
+            <hr />
+            @Html.HiddenFor(x => x.ProjeId, new { @value = ViewBag.projeId })
+            @Html.HiddenFor(x => x.OdemeId)
+            <div class="form-horizontal">
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right"><b>Firma</b></label>
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(x => x.TedarikciId, (List<SelectListItem>)ViewBag.fListe, new { @class = "form-control", @style = "width:300%" })
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right"><b>Ödeme Türü</b></label>
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(x => x.OdemeTuruId, (List<SelectListItem>)ViewBag.oTListe, new { @class = "form-control", @style = "width:100%" })
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right"><b>Ödeme Şekli</b></label>
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(x => x.OdemeSekliId, (List<SelectListItem>)ViewBag.oSListe, new { @class = "form-control", @style = "width:100%" })
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right"><b>Ödeme Tarihi</b></label>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(x => x.OdemeTarihi, "{0:yyyy-MM-dd}", new { @class = "form-control", @style = "width:110%;", @type = "date" })
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right"><b>Ödeme Tutarı</b></label>
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(x => x.OdemeTutari, new { @class = "form-control sozBedel", @style = "width:150%; text-align:right;" })
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
+                    <button class="btn btn-success">Güncelle</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

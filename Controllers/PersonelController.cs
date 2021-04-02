@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -229,7 +230,8 @@ namespace SantiyeTakipOtomasyon.Controllers
         }
         public ActionResult PersonelPuantaj(int? id)
         {
-            var liste = c.Personels.OrderBy(p => p.PersonelId).Where(x => x.ProjeId == id).ToList();
+            var liste = c.PersonelPuantajs.OrderBy(p => p.PersonelId).ToList();
+            //var liste = c.Personels.OrderBy(p => p.PersonelId).Where(x => x.ProjeId == id).ToList();
             var ProjeAdi = c.Projes.Where(p => p.ProjeId == id).Select(a => a.ProAdi).FirstOrDefault();
 
             List<SelectListItem> ayListe = (from a in c.Aylars.ToList()
@@ -247,35 +249,150 @@ namespace SantiyeTakipOtomasyon.Controllers
         }
         public ActionResult PersonelPuantajOlustur(int? id)
         {
-            var ay = (DateTime.Now.Month) - 1;
+            var ay = (DateTime.Now.Month - 2);
             var yil = DateTime.Now.Year;
             var idList = c.Personels.Where(p => p.ProjeId == id).Select(x => x.PersonelId).ToList();
-            var gunler = DateTime.DaysInMonth(yil, ay);
-            var tarihListe = c.ResmiTatils.Where(x => x.Tarih.Year == yil && x.Tarih.Month == ay).ToList();
-            string cDurum;
-            List<DateTime> ResmiTatil = new List<DateTime>();
+            var gunSayisi = DateTime.DaysInMonth(yil, ay);
 
             foreach (int perId in idList)
             {
-                for (int gun = 1; gun < gunler; gun++)
+                PersonelPuantaj p = new PersonelPuantaj();
+
+                p.PuaYil = yil;
+                p.PuaAy = ay;
+                p.PersonelId = perId;
+                if (gunSayisi == 31)
                 {
-                    string gunAd = new DateTime(yil, ay, gun).ToString("dddd");
-                    DateTime tarih = new DateTime(yil, ay, gun);
-                    foreach (var rtListe in tarihListe)
-                    {
-                        if(rtListe.Tarih == tarih)
-                        {
-                            cDurum = "RT";
-                        }
-                    }
-                    if (gunAd == "Pazar")
-                    {
-                        cDurum = "HT";
-                    }
+                    p.PuaGun1 = false;
+                    p.PuaGun2 = false;
+                    p.PuaGun3 = false;
+                    p.PuaGun4 = false;
+                    p.PuaGun5 = false;
+                    p.PuaGun6 = false;
+                    p.PuaGun7 = false;
+                    p.PuaGun8 = false;
+                    p.PuaGun9 = false;
+                    p.PuaGun10 = false;
+                    p.PuaGun11 = false;
+                    p.PuaGun12 = false;
+                    p.PuaGun13 = false;
+                    p.PuaGun14 = false;
+                    p.PuaGun15 = false;
+                    p.PuaGun16 = false;
+                    p.PuaGun17 = false;
+                    p.PuaGun18 = false;
+                    p.PuaGun19 = false;
+                    p.PuaGun20 = false;
+                    p.PuaGun21 = false;
+                    p.PuaGun22 = false;
+                    p.PuaGun23 = false;
+                    p.PuaGun24 = false;
+                    p.PuaGun25 = false;
+                    p.PuaGun26 = false;
+                    p.PuaGun27 = false;
+                    p.PuaGun28 = false;
+                    p.PuaGun29 = false;
+                    p.PuaGun30 = false;
+                    p.PuaGun31 = false;
+                } else if (gunSayisi == 30)
+                {
+                    p.PuaGun1 = false;
+                    p.PuaGun2 = false;
+                    p.PuaGun3 = false;
+                    p.PuaGun4 = false;
+                    p.PuaGun5 = false;
+                    p.PuaGun6 = false;
+                    p.PuaGun7 = false;
+                    p.PuaGun8 = false;
+                    p.PuaGun9 = false;
+                    p.PuaGun10 = false;
+                    p.PuaGun11 = false;
+                    p.PuaGun12 = false;
+                    p.PuaGun13 = false;
+                    p.PuaGun14 = false;
+                    p.PuaGun15 = false;
+                    p.PuaGun16 = false;
+                    p.PuaGun17 = false;
+                    p.PuaGun18 = false;
+                    p.PuaGun19 = false;
+                    p.PuaGun20 = false;
+                    p.PuaGun21 = false;
+                    p.PuaGun22 = false;
+                    p.PuaGun23 = false;
+                    p.PuaGun24 = false;
+                    p.PuaGun25 = false;
+                    p.PuaGun26 = false;
+                    p.PuaGun27 = false;
+                    p.PuaGun28 = false;
+                    p.PuaGun29 = false;
+                    p.PuaGun30 = false;
                 }
+                else if (gunSayisi == 28)
+                {
+                    p.PuaGun1 = false;
+                    p.PuaGun2 = false;
+                    p.PuaGun3 = false;
+                    p.PuaGun4 = false;
+                    p.PuaGun5 = false;
+                    p.PuaGun6 = false;
+                    p.PuaGun7 = false;
+                    p.PuaGun8 = false;
+                    p.PuaGun9 = false;
+                    p.PuaGun10 = false;
+                    p.PuaGun11 = false;
+                    p.PuaGun12 = false;
+                    p.PuaGun13 = false;
+                    p.PuaGun14 = false;
+                    p.PuaGun15 = false;
+                    p.PuaGun16 = false;
+                    p.PuaGun17 = false;
+                    p.PuaGun18 = false;
+                    p.PuaGun19 = false;
+                    p.PuaGun20 = false;
+                    p.PuaGun21 = false;
+                    p.PuaGun22 = false;
+                    p.PuaGun23 = false;
+                    p.PuaGun24 = false;
+                    p.PuaGun25 = false;
+                    p.PuaGun26 = false;
+                    p.PuaGun27 = false;
+                    p.PuaGun28 = false;
+                }
+                else if (gunSayisi == 29)
+                {
+                    p.PuaGun1 = false;
+                    p.PuaGun2 = false;
+                    p.PuaGun3 = false;
+                    p.PuaGun4 = false;
+                    p.PuaGun5 = false;
+                    p.PuaGun6 = false;
+                    p.PuaGun7 = false;
+                    p.PuaGun8 = false;
+                    p.PuaGun9 = false;
+                    p.PuaGun10 = false;
+                    p.PuaGun11 = false;
+                    p.PuaGun12 = false;
+                    p.PuaGun13 = false;
+                    p.PuaGun14 = false;
+                    p.PuaGun15 = false;
+                    p.PuaGun16 = false;
+                    p.PuaGun17 = false;
+                    p.PuaGun18 = false;
+                    p.PuaGun19 = false;
+                    p.PuaGun20 = false;
+                    p.PuaGun21 = false;
+                    p.PuaGun22 = false;
+                    p.PuaGun23 = false;
+                    p.PuaGun24 = false;
+                    p.PuaGun25 = false;
+                    p.PuaGun26 = false;
+                    p.PuaGun27 = false;
+                    p.PuaGun28 = false;
+                    p.PuaGun29 = false;
+                }
+                c.PersonelPuantajs.Add(p);
+                c.SaveChanges();
             }
-
-
             return View();
         }
     }

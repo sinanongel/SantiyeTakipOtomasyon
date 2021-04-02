@@ -7,15 +7,14 @@ using System.Web;
 
 namespace SantiyeTakipOtomasyon.Models.Siniflar
 {
-    public class OdemeSekli
+    public class OdemeTuru
     {
         [Key]
-        public int OdemeSekliId { get; set; }
+        public int OdemeTuruId { get; set; }
 
         [Column(TypeName = "Varchar")]
-        [StringLength(20)]
-        public string OdSekliAdi { get; set; }
-        public ICollection<Fatura> Faturas { get; set; }
-        public ICollection<Tedarikci> Tedarikcis { get; set; }
+        [StringLength(10)]
+        public string TurAdi { get; set; }
+        public ICollection<Odeme> Odemes { get; set; }
     }
 }

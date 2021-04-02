@@ -32,7 +32,7 @@
             e.preventDefault();
 
             var ProId = $("#ProjeId").val();
-            var url = '@Url.Action("FaturaDinamik", "Fatura")/' + ProId;
+            var url = '@Url.Action("ListeGetir","Odeme")/' + ProId;
             window.location.href = url;
         });
     });

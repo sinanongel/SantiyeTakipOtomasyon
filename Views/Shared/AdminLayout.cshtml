@@ -14,6 +14,7 @@
     <title>Proje Takip Otomasyonu - SB Admin</title>
     <link href="~/web/dist/css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -60,9 +61,21 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-industry"></i></div>
                             Tedarikçi
                         </a>
+                        <a class="nav-link" href="@Url.Action("Index", "Proje")">
+                            <div class="sb-nav-link-icon"><i class="fas fa-calendar"></i></div>
+                            Proje
+                        </a>
                         <div class="sb-sidenav-menu-heading">Interface</div>
+                        <a class="nav-link proje" href="" data-toggle="modal" data-target="@Url.Action("Index", "Fatura")">
+                            <div class="sb-nav-link-icon"><i class="fas fa-file"></i></div>
+                            Fatura
+                        </a>
+                        <a class="nav-link odeme" href="" data-toggle="modal" data-target="@Url.Action("ProjeSecim", "Odeme")">
+                            <div class="sb-nav-link-icon"><i class="fa fa-credit-card"></i></div>
+                            Ödemeler
+                        </a>
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                             Personel
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -73,14 +86,6 @@
                                 <a class="nav-link puantaj" href="#" data-toggle="modal" data-target="@Url.Action("PuantajProjeSecim", "Personel")">Puantaj</a>
                             </nav>
                         </div>
-                        <a class="nav-link proje" href="" data-toggle="modal" data-target="@Url.Action("Index", "Fatura")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-industry"></i></div>
-                            Fatura
-                        </a>
-                        <a class="nav-link" href="@Url.Action("Index", "Proje")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-calendar"></i></div>
-                            Proje
-                        </a>
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                             Pages
@@ -127,6 +132,20 @@
                         @RenderBody()
 
                         <div class="container">
+                            <!--Puantaj Proje Modal -->
+                            <div class="modal fade" id="proje" role="dialog">
+                                <div class="modal-dialog modal-lg modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="container">
                             <!--Personel Proje Modal -->
                             <div class="modal fade" id="personelModal" role="dialog">
                                 <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -142,6 +161,19 @@
                         <div class="container">
                             <!--Puantaj Proje Modal -->
                             <div class="modal fade" id="puantajModal" role="dialog">
+                                <div class="modal-dialog modal-lg modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container">
+                            <!--Puantaj Proje Modal -->
+                            <div class="modal fade" id="odemeModal" role="dialog">
                                 <div class="modal-dialog modal-lg modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-body">
@@ -176,6 +208,20 @@
 
     <script type="text/javascript">
         $(function () {
+            $("body").on("click", ".proje", function () {
+                var url = $(this).data("target");
+                $.post(url, function (data) { })
+                    .done(function (data) {
+                        $("#personelModal .modal-body").html(data);
+                        $("#personelModal").modal("show");
+                    })
+                    .fail(function () {
+                        $("#personelModal .modal-body").text("Hata!!");
+                        $("#personelModal").modal("show");
+                    })
+            });
+        });
+        $(function () {
             $("body").on("click", ".personel", function () {
                 var url = $(this).data("target");
                 $.post(url, function (data) { })
@@ -203,7 +249,22 @@
                         $("#puantajModal").modal("show");
                     })
             });
-        });        
+        });
+
+        $(function () {
+            $("body").on("click", ".odeme", function () {
+                var url = $(this).data("target");
+                $.post(url, function (data) { })
+                    .done(function (data) {
+                        $("#odemeModal .modal-body").html(data);
+                        $("#odemeModal").modal("show");
+                    })
+                    .fail(function () {
+                        $("#odemeModal .modal-body").text("Hata!!");
+                        $("#odemeModal").modal("show");
+                    })
+            });
+        });
     </script>
 </body>
 </html>

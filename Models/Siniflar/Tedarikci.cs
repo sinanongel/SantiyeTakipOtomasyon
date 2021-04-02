@@ -52,5 +52,6 @@ namespace SantiyeTakipOtomasyon.Models.Siniflar
         public virtual Ilceler Ilceler { get; set; }
 
         public ICollection<Fatura> Faturas { get; set; }
+        public ICollection<Odeme> Odemes { get; set; }
     }
 }

@@ -28,5 +28,8 @@ namespace SantiyeTakipOtomasyon.Models.Siniflar
         public DbSet<IzinTuru> IzinTurus { get; set; }
         public DbSet<Aylar> Aylars { get; set; }
         public DbSet<ResmiTatil> ResmiTatils { get; set; }
+        public DbSet<Odeme> Odemes { get; set; }
+        public DbSet<OdemeTuru> OdemeTurus { get; set; }
+        public DbSet<Kullanici> Kullanicis { get; set; }
     }
 }

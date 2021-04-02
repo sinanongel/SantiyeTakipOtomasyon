@@ -20,6 +20,5 @@ namespace SantiyeTakipOtomasyon.Models.Siniflar
         [StringLength(2)]
         public string CalismaDurumKod { get; set; }
 
-        public ICollection<PersonelPuantaj> PersonelPuantajs { get; set; }
     }
 }

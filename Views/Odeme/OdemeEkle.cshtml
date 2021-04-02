@@ -1,0 +1,60 @@
+﻿@model SantiyeTakipOtomasyon.Models.Siniflar.Odeme
+
+<div class="card card-default">
+    <div class="card-header bg-dark">
+        <div class="row">
+            <h5 class="card-title mb-sm-1 col-md-11" style="color:white">
+                <strong>Ödeme Giriş</strong>
+            </h5>
+        </div>
+    </div>
+    <div class="container">
+        <form action="@Url.Action("OdemeEkle", "Odeme")" method="post">
+            <hr />
+            <input hidden id="ProjeId" name="ProjeId" value="@ViewBag.projeId" />
+            <div class="form-horizontal">
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right"><b>Firma</b></label>
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(x => x.TedarikciId, (List<SelectListItem>)ViewBag.fListe, "------------------------ Seçiniz ------------------------", new { @class = "form-control", @style = "width:300%" })
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right"><b>Ödeme Türü</b></label>
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(x => x.OdemeTuruId, (List<SelectListItem>)ViewBag.oTListe, "--- Seçiniz ---", new { @class = "form-control", @style = "width:100%" })
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right"><b>Ödeme Şekli</b></label>
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(x => x.OdemeSekliId, (List<SelectListItem>)ViewBag.oSListe, "--- Seçiniz ---", new { @class = "form-control", @style = "width:100%" })
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right"><b>Ödeme Tarihi</b></label>
+                    <div class="col-md-3">
+                        <input type="date" id="OdemeTarihi" name="OdemeTarihi" class="form-control" style="width:110%;" />
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right"><b>Ödeme Tutarı</b></label>
+                    <div class="col-md-2">
+                        <input type="text" id="OdemeTutari" name="OdemeTutari" class="form-control" style="width:150%; text-align:right" />
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
+                    <button class="btn btn-info">Ekle</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+

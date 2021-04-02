@@ -52,5 +52,6 @@ namespace SantiyeTakipOtomasyon.Models.Siniflar
 
         public ICollection<Fatura> Faturas { get; set; }
         public ICollection<Personel> Personels { get; set; }
+        public ICollection<Odeme> Odemes { get; set; }
     }
 }
