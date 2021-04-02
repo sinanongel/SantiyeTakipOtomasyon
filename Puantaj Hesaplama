@@ -1,0 +1,85 @@
+public ActionResult PersonelPuantajOlustur(int? id)
+        {
+            var ay = (DateTime.Now.Month - 2);
+            var yil = DateTime.Now.Year;
+            //var izinListe = c.PersonelIzins.ToList();
+            var idList = c.Personels.Where(p => p.ProjeId == id).Select(x => x.PersonelId).ToList();
+            var gunler = DateTime.DaysInMonth(yil, ay);
+            var tarihListe = c.ResmiTatils.Where(x => x.Tarih.Year == yil && x.Tarih.Month == ay).ToList();
+
+            foreach (int perId in idList)
+            {
+                PersonelPuantaj p = new PersonelPuantaj();
+
+                var izinId = c.PersonelIzins.Where(x => x.PersonelId == perId).Select(s => s.PersonelIzinId).ToList();
+                List<DateTime> IzinTarihListe = new List<DateTime>();
+                List<int> IzinTur = new List<int>();
+
+                foreach(var izId in izinId)
+                {
+                    var izinSure = c.PersonelIzins.Where(x => x.PersonelIzinId == izId).Select(s => s.IzinSuresi).FirstOrDefault();
+                    var izinBasTarih= c.PersonelIzins.Where(x => x.PersonelIzinId == izId).Select(s => s.IzinBaslangicTarihi).FirstOrDefault();
+                    var izTur = c.PersonelIzins.Where(x => x.PersonelIzinId == izId).Select(s => s.IzinTuruId).FirstOrDefault();
+
+                    for (var iSu = 0; iSu < izinSure; iSu++)
+                    {
+                        IzinTarihListe.Add(izinBasTarih.AddDays(iSu));
+                        IzinTur.Add(izTur);
+                    }
+                }
+                
+                for (int gun = 1; gun < gunler; gun++)
+                {
+                    var cDurum = "";
+                    string gunAd = new DateTime(yil, ay, gun).ToString("dddd");
+                    DateTime tarih = new DateTime(yil, ay, gun);
+                    foreach (var rtListe in tarihListe)
+                    {
+                        if (rtListe.Tarih == tarih)
+                        {
+                            cDurum = "RT";
+                        }
+                    }
+                    if (gunAd == "Pazar")
+                    {
+                        cDurum = "HT";
+                    }
+                    foreach (DateTime it in IzinTarihListe)
+                    {
+                        if (it == tarih)
+                        {
+                            int itSira = IzinTarihListe.IndexOf(it);
+                            var izinTur = IzinTur[itSira];
+                            if (izinTur == 1)
+                            {
+                                cDurum = "İ";
+                            }
+                            if (izinTur == 2)
+                            {
+                                cDurum = "Y";
+                            }
+                            if (izinTur == 3)
+                            {
+                                cDurum = "R";
+                            }
+                            if (izinTur == 4)
+                            {
+                                cDurum = "M";
+                            }
+                        }
+                    }
+                    if (cDurum == "")
+                    {
+                        cDurum = "Ç";
+                    }
+                    p.PuaYil = yil;
+                    p.PuaAy = ay;
+                    p.PuaGunAd = gunAd;
+                    p.PersonelId = perId;
+                    p.CalismaDurumKod = cDurum;
+                    c.PersonelPuantajs.Add(p);
+                    c.SaveChanges();
+                }
+            }
+            return View();
+        }
