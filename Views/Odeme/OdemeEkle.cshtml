@@ -14,37 +14,37 @@
             <input hidden id="ProjeId" name="ProjeId" value="@ViewBag.projeId" />
             <div class="form-horizontal">
                 <div class="container form-group-sm row">
-                    <label class="col-form-label-sm col-md-3 text-right"><b>Firma</b></label>
+                    <label class="col-form-label-sm col-md-3 text-right" style="color:red"><b>Firma</b></label>
                     <div class="col-md-3">
-                        @Html.DropDownListFor(x => x.TedarikciId, (List<SelectListItem>)ViewBag.fListe, "------------------------ Seçiniz ------------------------", new { @class = "form-control", @style = "width:300%" })
+                        @Html.DropDownListFor(x => x.TedarikciId, (List<SelectListItem>)ViewBag.fListe, "------------------------ Seçiniz ------------------------", new { @class = "form-control", @style = "width:300%", @required = "" })
                     </div>
                 </div>
                 <br />
                 <div class="container form-group-sm row">
-                    <label class="col-form-label-sm col-md-3 text-right"><b>Ödeme Türü</b></label>
+                    <label class="col-form-label-sm col-md-3 text-right" style="color:red"><b>Ödeme Türü</b></label>
                     <div class="col-md-3">
-                        @Html.DropDownListFor(x => x.OdemeTuruId, (List<SelectListItem>)ViewBag.oTListe, "--- Seçiniz ---", new { @class = "form-control", @style = "width:100%" })
+                        @Html.DropDownListFor(x => x.OdemeTuruId, (List<SelectListItem>)ViewBag.oTListe, "--- Seçiniz ---", new { @class = "form-control", @style = "width:100%", @required = "" })
                     </div>
                 </div>
                 <br />
                 <div class="container form-group-sm row">
-                    <label class="col-form-label-sm col-md-3 text-right"><b>Ödeme Şekli</b></label>
+                    <label class="col-form-label-sm col-md-3 text-right" style="color:red"><b>Ödeme Şekli</b></label>
                     <div class="col-md-3">
-                        @Html.DropDownListFor(x => x.OdemeSekliId, (List<SelectListItem>)ViewBag.oSListe, "--- Seçiniz ---", new { @class = "form-control", @style = "width:100%" })
+                        @Html.DropDownListFor(x => x.OdemeSekliId, (List<SelectListItem>)ViewBag.oSListe, "--- Seçiniz ---", new { @class = "form-control", @style = "width:100%", @required = "" })
                     </div>
                 </div>
                 <br />
                 <div class="container form-group-sm row">
-                    <label class="col-form-label-sm col-md-3 text-right"><b>Ödeme Tarihi</b></label>
+                    <label class="col-form-label-sm col-md-3 text-right" style="color:red"><b>Ödeme Tarihi</b></label>
                     <div class="col-md-3">
                         <input type="date" id="OdemeTarihi" name="OdemeTarihi" class="form-control" style="width:110%;" />
                     </div>
                 </div>
                 <br />
                 <div class="container form-group-sm row">
-                    <label class="col-form-label-sm col-md-3 text-right"><b>Ödeme Tutarı</b></label>
+                    <label class="col-form-label-sm col-md-3 text-right" style="color:red"><b>Ödeme Tutarı</b></label>
                     <div class="col-md-2">
-                        <input type="text" id="OdemeTutari" name="OdemeTutari" class="form-control" style="width:150%; text-align:right" />
+                        <input type="text" id="OdemeTutari" name="OdemeTutari" class="form-control" style="width:150%; text-align:right" required oninvalid="this.setCustomValidity('Bu alan boş geçilemez!')" oninput="setCustomValidity('')"  />
                     </div>
                 </div>
                 <br />

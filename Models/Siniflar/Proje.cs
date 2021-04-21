@@ -27,10 +27,18 @@ namespace SantiyeTakipOtomasyon.Models.Siniflar
         [Column(TypeName = "Varchar")]
         [StringLength(100)]
         public string ProYapiDenetim { get; set; }
-        public DateTime ProSozlesmeTarihi { get; set; }
-        public DateTime ProYerTeslimTarihi { get; set; }
-        public DateTime ProIseBaslamaTarihi { get; set; }
-        public DateTime ProIsinBitisTarihi { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime? ProSozlesmeTarihi { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime? ProYerTeslimTarihi { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime? ProIseBaslamaTarihi { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime? ProIsinBitisTarihi { get; set; }
         public int ProSozlesmeSuresi { get; set; }
         public int ProSureUzatimi1 { get; set; }
         public int ProSureUzatimi2 { get; set; }

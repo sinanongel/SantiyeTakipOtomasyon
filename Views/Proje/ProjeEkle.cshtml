@@ -13,77 +13,77 @@
             <hr />
             <div class="form-horizontal">
                 <div class="container form-group-sm row">
-                    <label class="col-form-label-sm col-md-2 text-right"><b>Proje Adı</b></label>
+                    <label class="col-form-label-sm col-md-2 text-right" style="color:red"><b>Proje Adı</b></label>
                     <div class="col-md-3">
-                        <input type="text" id="ProAdi" name="ProAdi" placeholder="Proje Adını Giriniz" class="form-control" style="width:200%;" />
+                        <input type="text" id="ProAdi" name="ProAdi" placeholder="Proje Adını Giriniz" class="form-control" style="width:200%;" maxlength="100" required oninvalid="this.setCustomValidity('Bu alan boş geçilemez!')" oninput="setCustomValidity('')" />
                     </div>
                 </div>
                 <br />
                 <div class="container form-group-sm row">
-                    <label class="col-form-label-sm col-md-2 text-right"><b>Proje Adresi</b></label>
+                    <label class="col-form-label-sm col-md-2 text-right" style="color:red"><b>Proje Adresi</b></label>
                     <div class="col-md-3">
-                        <input type="text" id="ProAdres" name="ProAdres" placeholder="Proje Adresini Giriniz" class="form-control" style="width:200%;" />
+                        <input type="text" id="ProAdres" name="ProAdres" placeholder="Proje Adresini Giriniz" class="form-control" style="width:200%;" maxlength="100" required oninvalid="this.setCustomValidity('Bu alan boş geçilemez!')" oninput="setCustomValidity('')" />
                     </div>
                 </div>
                 <br />
                 <div class="container form-group-sm row">
-                    <label class="col-form-label-sm col-md-2 text-right"><b>İl/İlçe</b></label>
+                    <label class="col-form-label-sm col-md-2 text-right" style="color:red"><b>İl/İlçe</b></label>
                     <div class="col-md-3">
-                        @Html.DropDownListFor(x => x.IllerId, (List<SelectListItem>)ViewBag.iList, "------- Seçiniz -------", new { @class = "form-control", @style = "width:90%" })
+                        @Html.DropDownListFor(x => x.IllerId, (List<SelectListItem>)ViewBag.iList, "------- Seçiniz -------", new { @class = "form-control", @style = "width:90%", @required = "" })
                     </div>
                     <div class="col-md-7">
-                        @Html.DropDownListFor(x => x.IlcelerId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control", @style = "width:45%" })
+                        @Html.DropDownListFor(x => x.IlcelerId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control", @style = "width:45%", @required = "" })
                     </div>
                 </div>
                 <br />
                 <div class="container form-group-sm row">
-                    <label class="col-form-label-sm col-md-2 text-right"><b>Müşavir</b></label>
+                    <label class="col-form-label-sm col-md-2 text-right" ><b>Müşavir</b></label>
                     <div class="col-md-3">
-                        <input type="text" id="ProMusavir" name="ProMusavir" placeholder="Müşavir Adını Giriniz" class="form-control" style="width:200%;" />
+                        <input type="text" id="ProMusavir" name="ProMusavir" placeholder="Müşavir Adını Giriniz" class="form-control" style="width:200%;" maxlength="100"  />
                     </div>
                 </div>
                 <br />
                 <div class="container form-group-sm row">
-                    <label class="col-form-label-sm col-md-2 text-right"><b>Yapı Denetim</b></label>
+                    <label class="col-form-label-sm col-md-2 text-right" ><b>Yapı Denetim</b></label>
                     <div class="col-md-3">
-                        <input type="text" id="ProYapiDenetim" name="ProYapiDenetim" placeholder="Yapı Denetim Firmasını Giriniz" class="form-control" style="width:200%;" />
+                        <input type="text" id="ProYapiDenetim" name="ProYapiDenetim" placeholder="Yapı Denetim Firmasını Giriniz" class="form-control" style="width:200%;" maxlength="100" />
                     </div>
                 </div>
                 <br />
                 <div class="container form-group-sm row">
-                    <label class="col-form-label-sm col-md-2 text-right"><b>Sözleşme Tarihi</b></label>
+                    <label class="col-form-label-sm col-md-2 text-right" ><b>Sözleşme Tarihi</b></label>
                     <div class="col-md-2">
                         <input type="date" id="ProSozlesmeTarihi" name="ProSozlesmeTarihi" class="form-control" style="width:110%;" />
                     </div>
-                    <label class="col-form-label-sm col-md-2 text-right"><b>Yer Teslim Tarihi</b></label>
+                    <label class="col-form-label-sm col-md-2 text-right" ><b>Yer Teslim Tarihi</b></label>
                     <div class="col-md-2">
                         <input type="date" id="ProYerTeslimTarihi" name="ProYerTeslimTarihi" class="form-control" style="width:110%;" />
                     </div>
                 </div>
                 <br />
                 <div class="container form-group-sm row">
-                    <label class="col-form-label-sm col-md-2 text-right"><b>İşe Başlama Tarihi</b></label>
+                    <label class="col-form-label-sm col-md-2 text-right" ><b>İşe Başlama Tarihi</b></label>
                     <div class="col-md-2">
                         <input type="date" id="ProIseBaslamaTarihi" name="ProIseBaslamaTarihi" class="form-control" style="width:110%;" />
                     </div>
-                    <label class="col-form-label-sm col-md-2 text-right"><b>İşin Bitiş Tarihi</b></label>
+                    <label class="col-form-label-sm col-md-2 text-right" ><b>İşin Bitiş Tarihi</b></label>
                     <div class="col-md-2">
                         <input type="date" id="ProIsinBitisTarihi" name="ProIseBitisTarihi" class="form-control" style="width:110%;" />
                     </div>
-                    <label class="col-form-label-sm col-md-2 text-right"><b>Sözleşme Süresi</b></label>
+                    <label class="col-form-label-sm col-md-2 text-right" ><b>Sözleşme Süresi</b></label>
                     <div class="col-md-2">
                         <input type="text" id="ProSozlesmeSuresi" name="ProSozlesmeSuresi" class="form-control" style="width:60%; text-align:right" />
                     </div>
                 </div>
                 <br />
                 <div class="container form-group-sm row">
-                    <label class="col-form-label-sm col-md-2 text-right"><b>Sözleşme Bedeli</b></label>
+                    <label class="col-form-label-sm col-md-2 text-right" ><b>Sözleşme Bedeli</b></label>
                     <div class="col-md-2">
                         <input type="text" id="ProSozlesmeBedeli" name="ProSozlesmeBedeli" class="form-control" style="width:100%; text-align:right" />
                     </div>
-                    <label class="col-form-label-sm col-md-2 text-right"><b>Proje Durumu</b></label>
+                    <label class="col-form-label-sm col-md-2 text-right" style="color:red"><b>Proje Durumu</b></label>
                     <div class="col-md-2">
-                        @Html.DropDownListFor(x => x.ProDurumId, (List<SelectListItem>)ViewBag.dList, "----- Seçiniz -----", new { @class = "form-control", @style = "width:130%" })
+                        @Html.DropDownListFor(x => x.ProDurumId, (List<SelectListItem>)ViewBag.dList, "----- Seçiniz -----", new { @class = "form-control", @style = "width:130%", @required = "" })
                     </div>
                 </div>
                 <br />

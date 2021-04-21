@@ -10,16 +10,16 @@
         <hr />
         <div>
             <div class="container form-group row">
-                <label class="col-md-3 text-right"><b>Fatura Seri/Sıra No :</b></label>@ViewBag.fSeri/@ViewBag.fSiraNo
+                <label class="col-md-3 text-right"><b>Fatura No :</b></label>@ViewBag.fSiraNo
                 <label class="col-md-3 text-right"><b>Firma/Şahıs :</b></label>@ViewBag.fFirma
             </div>
             <div class="container form-group row">
                 <label class="col-md-3 text-right"><b>Fatura Tarihi :</b></label>@ViewBag.fTarihi
             </div>
             <div class="container form-group row">
-                <label class="col-md-3 text-right"><b>Fatura Toplamı</b></label>@ViewBag.fTutari
-                <label class="col-md-3 text-right"><b>Kdv Toplamı</b></label>@ViewBag.fKdvTutari
-                <label class="col-md-3 text-right"><b>Ödenecek Tutar</b></label>@ViewBag.fOdenecekTutar
+                <label class="col-md-3 text-right"><b>Fatura Toplamı :</b></label>@ViewBag.fTutari
+                <label class="col-md-3 text-right"><b>Kdv Toplamı :</b></label>@ViewBag.fKdvTutari
+                <label class="col-md-3 text-right"><b>Ödenecek Tutar :</b></label>@ViewBag.fOdenecekTutar
             </div>
         </div>
         <h5 style="margin-top:10px;color:#ff6347">Fatura Detay Girişi</h5>
@@ -27,38 +27,43 @@
         <div class="form-horizontal">
             <input type="hidden" value="@ViewBag.fId" name="FaturaId" id="FaturaId" />
             <div class="container form-group row">
-                <label class="col-form-label col-md-2 text-right"><b>Mal/Hizmet</b></label>
-                <div class="col-md-3">
-                    <input type="text" id="FdCinsi" name="FdCinsi" placeholder="Mal/Hizmet Açıklamasını Giriniz" class="form-control" style="width:400px;"  />
-                </div>
-                <label class="col-form-label col-md-3 text-right"><b>Miktar</b></label>
-                <div class="col-md-1">
-                    <input type="text" id="FdMiktar" name="FdMiktar" placeholder="Miktar" class="form-control FdMiktar" style="width:70px; text-align:right" />
+                <label class="col-form-label col-md-3 text-right" style="color:red"><b>Mal-Hizmet Grup/Adı</b></label>
+                <div class="col-md-2">
+                    @Html.DropDownList("selection1", (List<SelectListItem>)ViewBag.mhgList, "--- Seçiniz ---", new { @class = "form-control", @style = "width:150px", @name = "MalHizmetGrupId", @id = "MalHizmetGrupId" })
                 </div>
                 <div class="col-md-3">
-                    @Html.DropDownListFor(x => x.BirimId, (List<SelectListItem>)ViewBag.bList, new { @class = "form-control", @style = "width:100px", @name = "BirimId", @id = "BirimId" })
+                    @Html.DropDownListFor(x => x.MalHizmetId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control", @style = "width:400px", @name = "MalHizmetId", @id = "MalHizmetId" })
                 </div>
             </div>
             <div class="container form-group row">
-                <label class="col-form-label col-md-2 text-right"><b>Birim Fiyat</b></label>
+                <label class="col-form-label col-md-3 text-right" style="color:red"><b>Miktar</b></label>
                 <div class="col-md-1">
+                    <input type="text" id="FdMiktar" name="FdMiktar" placeholder="Miktar" class="form-control FdMiktar" style="width:85px; text-align:right" required oninvalid="this.setCustomValidity('Bu alan boş geçilemez!')" oninput="setCustomValidity('')" />
+                </div>
+                <div class="col-md-1">
+                    @Html.DropDownListFor(x => x.BirimId, (List<SelectListItem>)ViewBag.bList, new { @class = "form-control", @style = "width:100px", @name = "BirimId", @id = "BirimId" })
+                </div>
+                <label class="col-form-label col-md-2 text-right" style="color:red"><b>Birim Fiyat</b></label>
+                <div class="col-md-5">
                     <input id="FdBirimFiyat" name="FdBirimFiyat" type="text" class="form-control FdBirimFiyat" placeholder="Birim Fiyat" style="width:100px; text-align:right;" value="0,00" />
                 </div>
-                <label class="col-form-label col-md-2 text-right"><b>Döviz Cinsi</b></label>
+            </div>
+            <div class="container form-group row">
+                <label class="col-form-label col-md-3 text-right" style="color:red"><b>Döviz Cinsi</b></label>
                 <div class="col-md-1">
                     @Html.DropDownListFor(x => x.DovizId, (List<SelectListItem>)ViewBag.dList, new { @class = "form-control", @style = "width:90px", @name = "DovizId", @id = "DovizId" })
                 </div>
-                <label class="col-form-label col-md-1 text-right"><b>Kur</b></label>
+                <label class="col-form-label col-md-1 text-right" style="color:red"><b>Kur</b></label>
                 <div class="col-md-1">
                     <input class="form-control FdKur" style="width:80px; text-align:right;" type="text" name="FdKur" id="FdKur" value="1,00" />
                 </div>
-                <label class="col-form-label col-md-2 text-right"><b>Kdv Oranı(%)</b></label>
+                <label class="col-form-label col-md-2 text-right" style="color:red"><b>Kdv Oranı(%)</b></label>
                 <div class="col-md-2">
                     @Html.DropDownListFor(x => x.KdvId, (List<SelectListItem>)ViewBag.kList, new { @class = "form-control", @style = "width:80px", @id = "FKdvId" })
                 </div>
             </div>
             <div class="container form-group row">
-                <label class="col-form-label col-md-2 text-right"><b>Birim Fiyat(TL)</b></label>
+                <label class="col-form-label col-md-3 text-right"><b>Birim Fiyat(TL)</b></label>
                 <div class="col-md-1">
                     <input type="text" id="FdBirimFiyatTl" name="FdBirimFiyatTl" class="form-control" style="width:100px; text-align:right;" readonly />
                 </div>
@@ -68,11 +73,11 @@
                 </div>
                 <label class="col-form-label col-md-2 text-right"><b>Tutar</b></label>
                 <div class="col-md-2">
-                    <input style="width:80px; text-align:right;" type="text" class="form-control" name="FdTutar" id="FdTutar" value="0,00"  readonly />
+                    <input style="width:80px; text-align:right;" type="text" class="form-control" name="FdTutar" id="FdTutar" value="0,00" readonly />
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-info goster">Göster</button>
+                @*<button class="btn btn-info goster">Göster</button>*@
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
                 <button class="btn btn-info">Ekle</button>
             </div>
@@ -104,10 +109,24 @@
     }
     setInterval("hesapla()", 100);
 
-    //$(".goster").click(function (e) {
-    //    e.preventDefault();
-    //    var BirimFiyat = $(".FdBirimFiyat").val();
-    //    var BrmFiyat = BirimFiyat.replace(/,/g, '.');
-    //    alert(BrmFiyat);
-    //})
+    //Mal/Hizmet grubuna göre Mal/Hizmet getirme
+
+    $(document).ready(function () {
+        $('#MalHizmetGrupId').change(function () {
+            var MhgId = $(this).val();
+            var mhList = $('#MalHizmetId');
+            mhList.empty();
+            $.ajax({
+                url: '@Url.Action("MalHizmetListe", "Fatura")',
+                type: 'POST',
+                dataType: 'json',
+                data: { 'MhgId': MhgId },
+                success: function (data) {
+                    $.each(data, function (index, option) {
+                        mhList.append('<option value=' + option.Value + '>' + option.Text + '</option>');
+                    });
+                }
+            });
+        });
+    });
 </script>

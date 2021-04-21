@@ -18,5 +18,6 @@ namespace SantiyeTakipOtomasyon.Models.Siniflar
         public string BirimAdi { get; set; }
 
         public ICollection<FaturaDetay> FaturaDetays { get; set; }
+        public ICollection<MalHizmet> MalHizmets { get; set; }
     }
 }

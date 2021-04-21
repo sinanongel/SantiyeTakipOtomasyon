@@ -5,8 +5,8 @@
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 <br />
-<div class="card bg-secondary text-white">
-    <div class="card-body">Proje Adı : @ViewBag.proAd</div>
+<div class="card bg-secondary text-white" style="height:40px">
+    <div class="card-body align-items-center d-flex justify-content-center">Proje Adı : @ViewBag.proAd</div>
 </div>
 <br>
 
@@ -19,52 +19,41 @@
             <a href="#" class="btn btn-primary ekle col-md-1" data-target="@Url.Action("ModalAc", "Personel")/@ViewBag.projeId">Yeni Kayıt</a>
         </div>
     </div>
-    <br />
 
     <!--Personel Listesi-->
-
-    @if (Model.Count() != 0)
-    {
-        <div style="margin-left:1%; margin-right:1%">
-            <table id="liste" class="table table-bordered table-hover table-sm">
-                <thead>
-                    <tr>
-                        <th style="width:5%">Id</th>
-                        <th style="width:15%">Personel Adı</th>
-                        <th style="width:30%">Personel Adresi</th>
-                        <th style="width:5%">Telefon</th>
-                        <th style="width:10%">İşe Giriş Tarihi</th>
-                        <th style="width:10%">İşten Çıkış Tarihi</th>
-                        <th style="width:20%">Görevi</th>
-                        <th style="width:10%">Çalışma Dönemi</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                @foreach (var p in Model)
-                {
-                    <tr>
-                        <td class="" style="cursor:pointer;cursor:hand;" data-toggle="" data-target="">@p.PersonelId</td>
-                        <td class="" style="cursor:pointer;cursor:hand;" data-toggle="" data-target="">@p.PerAd @p.PerSoyad</td>
-                        <td class="" style="cursor:pointer;cursor:hand;" data-toggle="" data-target="">@p.PerAdres @p.Ilceler.IlceAdi/@p.Iller.Sehir</td>
-                        <td class="" style="cursor:pointer;cursor:hand;" data-toggle="" data-target="">@p.PerTelefon</td>
-                        <td class="" style="cursor:pointer;cursor:hand; text-align:center;" data-toggle="" data-target="">@string.Format("{0:dd/MM/yyyy}", p.PerIseGirisTarihi)</td>
-                        <td class="" style="cursor:pointer;cursor:hand; text-align:center;" data-toggle="" data-target="">@string.Format("{0:dd/MM/yyyy}", p.PerIstenCikisTarihi)</td>
-                        <td class="" style="cursor:pointer;cursor:hand;" data-toggle="" data-target="">@p.PerGorev</td>
-                        <td class="" style="cursor:pointer;cursor:hand;" data-toggle="" data-target="">@p.PerCalismaDonemi</td>
-                        <td><a href="@Url.Action("PersonelIzin", "Personel")/@p.PersonelId" class="btn btn-info btn-sm">İzin</a></td>
-                        <td><a href="#" class="btn btn-success btn-sm guncelle" data-target="@Url.Action("PersonelGetir", "Personel")/@p.PersonelId">Güncelle</a></td>
-                    </tr>
-                }
-            </table>
-        </div>
-    }
-    else
-    {
-        <div class="card-body">
-            <h3 style="color:red;">Boş!</h3>
-        </div>
-    }
+    <div style="margin-left:1%; margin-right:1%">
+        <br />
+        <table id="liste" class="table table-bordered table-hover table-sm">
+            <thead>
+                <tr>
+                    <th style="width:5%">Id</th>
+                    <th style="width:15%">Personel Adı</th>
+                    <th style="width:30%">Personel Adresi</th>
+                    <th style="width:5%">Telefon</th>
+                    <th style="width:10%">İşe Giriş Tarihi</th>
+                    <th style="width:10%">İşten Çıkış Tarihi</th>
+                    <th style="width:20%">Görevi</th>
+                    <th style="width:10%">Çalışma Dönemi</th>
+                    <th></th>
+                </tr>
+            </thead>
+            @foreach (var p in Model)
+            {
+                <tr>
+                    <td class="" style="cursor:pointer;cursor:hand;" data-toggle="" data-target="">@p.PersonelId</td>
+                    <td class="" style="cursor:pointer;cursor:hand;" data-toggle="" data-target="">@p.PerAd @p.PerSoyad</td>
+                    <td class="" style="cursor:pointer;cursor:hand;" data-toggle="" data-target="">@p.PerAdres @p.Ilceler.IlceAdi/@p.Iller.Sehir</td>
+                    <td class="" style="cursor:pointer;cursor:hand;" data-toggle="" data-target="">@p.PerTelefon</td>
+                    <td class="" style="cursor:pointer;cursor:hand; text-align:center;" data-toggle="" data-target="">@string.Format("{0:dd/MM/yyyy}", p.PerIseGirisTarihi)</td>
+                    <td class="" style="cursor:pointer;cursor:hand; text-align:center;" data-toggle="" data-target="">@string.Format("{0:dd/MM/yyyy}", p.PerIstenCikisTarihi)</td>
+                    <td class="" style="cursor:pointer;cursor:hand;" data-toggle="" data-target="">@p.PerGorev</td>
+                    <td class="" style="cursor:pointer;cursor:hand;" data-toggle="" data-target="">@p.PerCalismaDonemi</td>
+                    @*<td><a href="@Url.Action("PersonelIzin", "Personel")/@p.PersonelId" class="btn btn-info btn-sm">İzin</a></td>*@
+                    <td><a href="#" class="btn btn-success btn-sm guncelle" data-target="@Url.Action("PersonelGetir", "Personel")/@p.PersonelId">Güncelle</a></td>
+                </tr>
+            }
+        </table>
+    </div>
 </div>
 
 <div class="container">
@@ -104,8 +93,9 @@
     </div>
 </div>
 
-<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-<link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+<script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
     $(function () {

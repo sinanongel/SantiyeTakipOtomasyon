@@ -13,19 +13,22 @@ namespace SantiyeTakipOtomasyon.Models.Siniflar
         public int FaturaId { get; set; }
 
         [Column(TypeName = "Varchar")]
-        [StringLength(1)]
-        public string FatSeri { get; set; }
-
-        [Column(TypeName = "Varchar")]
-        [StringLength(6)]
+        [StringLength(10)]
         public string FatSiraNo { get; set; }
         public DateTime FatTarihi { get; set; }
+
+        [Column(TypeName = "Varchar")]
+        [StringLength(10)]
+        public string FatIrsaliyeNo { get; set; }
+        public DateTime? FatIrsaliyeTarihi { get; set; }
+        public DateTime? FatOnayTarihi { get; set; }
         public decimal FatToplami { get; set; }
         public decimal FatKdvToplami { get; set; }
         public decimal FatOdenecekTutar { get; set; }
         public bool OdemeDurumu { get; set; }
 
         public ICollection<FaturaDetay> FaturaDetays { get; set; }
+        public ICollection<Dosya> Dosyas { get; set; }
 
         public int TedarikciId { get; set; }
         public virtual Tedarikci Tedarikci { get; set; }

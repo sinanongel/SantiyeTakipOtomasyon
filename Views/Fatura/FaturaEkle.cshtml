@@ -1,42 +1,313 @@
-﻿@*@model SantiyeTakipOtomasyon.Models.Siniflar.Fatura
-<div class="container p-2 bg-dark text-white">
-    <form action="@Url.Action("FaturaEkle", "Fatura")" method="post">
-        <div class="modal-header">
-            <h5 class="modal-title">Fatura Girişi</h5>
+﻿@model SantiyeTakipOtomasyon.Models.Siniflar.FaturaFaturaDetay
+
+@*Fatura Bilgileri*@
+
+<h5 style="color:#ff6347">Fatura Bilgileri</h5>
+<hr />
+<div>
+    <input type="hidden" id="FaturaId" />
+    <input hidden id="ProjeId" name="ProjeId" value="@ViewBag.projeId" />
+    <div class="container form-group row">
+        <label class="col-form-label col-md-2 text-right" style="color:red"><b>Fatura No</b></label>
+        <div class="col-md-1">
+            <input style="width:110px;" type="text" class="form-control" name="FatSiraNo" id="FatSiraNo" placeholder="Fatura No" maxlength="9" required oninvalid="this.setCustomValidity('Bu alan boş geçilemez!')" oninput="setCustomValidity('')" />
+        </div>
+        <label class="col-form-label col-md-2 text-right" style="color:red"><b>Fatura Tarihi</b></label>
+        <div class="col-md-2">
+            <input style="width:160px;" type="date" class="form-control" name="FatTarihi" id="FatTarihi" />
+        </div>
+    </div>
+    <div class="container form-group row">
+        <label class="col-form-label col-md-2 text-right"><b>İrsaliye No</b></label>
+        <div class="col-md-1">
+            <input style="width:110px;" type="text" class="form-control" name="FatIrsaliyeNo" id="FatIrsaliyeNo" placeholder="İrsaliye No" maxlength="9" />
+        </div>
+        <label class="col-form-label col-md-2 text-right"><b>İrsaliye Tarihi</b></label>
+        <div class="col-md-2">
+            <input style="width:160px;" type="date" class="form-control" name="FatIrsaliyeTarihi" id="FatIrsaliyeTarihi" />
+        </div>
+        <label class="col-form-label col-md-2 text-right"><b>Onay tarihi</b></label>
+        <div class="col-md-2">
+            <input style="width:160px;" type="date" class="form-control" name="FatOnayTarihi" id="FatOnayTarihi" />
+        </div>
+    </div>
+    <div class="container form-group row">
+        <label class="col-form-label col-md-3 text-right" style="color:red"><b>Firma/Şahıs</b></label>
+        <div class="col-md-3">
+            @Html.DropDownList("selection1", (List<SelectListItem>)ViewBag.tList, "----------------------- Seçiniz ----------------------", new { @class = "form-control", @style = "width:400px", @name = "TedarikciId", @id = "TedarikciId", @required = "" })
+        </div>
+        <label class="col-form-label col-md-3 text-right" style="color:red"><b>Ödeme Türü</b></label>
+        <div class="col-md-3">
+            @Html.DropDownList("selection2", (List<SelectListItem>)ViewBag.oList, "---- Seçiniz ----", new { @class = "form-control", @style = "width:150px", @name = "OdemeSekliId", @id = "OdemeSekliId", @required = "" })
+        </div>
+    </div>
+    <div class="container form-group row">
+        <label class="col-form-label col-md-3 text-right"><b>Fatura Toplamı</b></label>
+        <div class="col-md-1">
+            <input style="width:115px; text-align:right;" type="number" class="form-control" name="FatToplami" id="FatToplami" readonly />
+        </div>
+        <label class="col-form-label col-md-2 text-right"><b>Kdv Toplamı</b></label>
+        <div class="col-md-1">
+            <input style="width:115px; text-align:right;" type="number" class="form-control" name="FatKdvToplami" id="FatKdvToplami" readonly />
+        </div>
+        <label class="col-form-label col-md-2 text-right"><b>Ödenecek Tutar</b></label>
+        <div class="col-md-3">
+            <input style="width:115px;  text-align:right;" type="number" class="form-control" name="FatOdenecekTutar" id="FatOdenecekTutar" readonly />
+        </div>
+    </div>
+
+    @*Fatura Detayları*@
+
+    <h5 style="margin-top:10px;color:#ff6347">Fatura Detayları</h5>
+    <hr />
+    <div class="form-horizontal">
+        <input type="hidden" id="id" />
+        <div class="container form-group row">
+            <label class="col-form-label col-md-3 text-right" style="color:red"><b>Mal-Hizmet Grup/Adı</b></label>
+            <div class="col-md-2">
+                @Html.DropDownList("selection7", (List<SelectListItem>)ViewBag.mhgList, "--- Seçiniz ---", new { @class = "form-control", @style = "width:150px", @name = "MalHizmetGrupId", @id = "MalHizmetGrupId" })
+            </div>
+            <div class="col-md-2">
+                @Html.DropDownList("selection6", Enumerable.Empty<SelectListItem>(), new { @class = "form-control", @style = "width:350px", @name = "MalHizmetId", @id = "MalHizmetId" })
+            </div>
+        </div>
+        <div class="container form-group row">
+            <label class="col-form-label col-md-3 text-right" style="color:red"><b>Miktar</b></label>
+            <div class="col-md-2">
+                <input type="text" id="FdMiktar" name="FdMiktar" placeholder="Miktar" class="form-control" style="width:150px; text-align:right" required oninvalid="this.setCustomValidity('Bu alan boş geçilemez!')" oninput="setCustomValidity('')" />
+            </div>
+            <div class="col-md-1">
+                @Html.DropDownList("selection3", (List<SelectListItem>)ViewBag.bList, new { @class = "form-control", @style = "width:100px", @name = "BirimId", @id = "BirimId" })
+            </div>
+            <label class="col-form-label col-md-2 text-right" style="color:red"><b>Birim Fiyat</b></label>
+            <div class="col-md-4">
+                <input type="number" step="0.01" id="FdBirimFiyat" name="FdBirimFiyat" placeholder="Birim Fiyat" class="form-control" style="width:150px; text-align:right;" required oninvalid="this.setCustomValidity('Bu alan boş geçilemez!')" oninput="setCustomValidity('')" />
+            </div>
+        </div>
+        <div class="container form-group row">
+            <label class="col-form-label col-md-3 text-right" style="color:red"><b>Döviz Cinsi</b></label>
+            <div class="col-md-1">
+                @Html.DropDownList("selection5", (List<SelectListItem>)ViewBag.dList, new { @class = "form-control", @style = "width:90px", @name = "DovizId", @id = "DovizId" })
+            </div>
+            <label class="col-form-label col-md-1 text-right" style="color:red"><b>Kur</b></label>
+            <div class="col-md-1">
+                <input style="width:80px; text-align:right;" type="number" step="0.01" class="form-control" name="FdKur" id="FdKur" value="1" required oninvalid="this.setCustomValidity('Bu alan boş geçilemez!')" oninput="setCustomValidity('')" />
+            </div>
+            <label class="col-form-label col-md-2 text-right" style="color:red"><b>Kdv Oranı(%)</b></label>
+            <div class="col-md-2">
+                @Html.DropDownList("selection4", (List<SelectListItem>)ViewBag.kList, new { @class = "form-control", @style = "width:80px", @name = "KdvId", @id = "KdvId" })
+            </div>
+        </div>
+        <div class="container">
+            <div class="row justify-content-end">
+                <div class="col-2">
+                    <a id="addToList" class="btn btn-primary text-white">Listeye Ekle</a>
+                </div>
+            </div>
+        </div>
+        <div class="container">
         </div>
         <br />
-        <div style="margin-left:70px">
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label" st>Fatura Seri/Sıra No</label>
-                <div class="col-sm-1">
-                    <input style="width:50px;" type="text" class="form-control" name="FatSeri" />
-                </div>
-                <div class="col-sm-8">
-                    <input style="width:75px;" type="text" class="form-control" name="FatSiraNo" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Fatura Tarihi</label>
-                <div class="col-sm-9">
-                    <input style="width:160px;" type="date" class="form-control" name="FatTarihi" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Firma/Şahıs</label>
-                <div class="col-sm-9">
-                    @Html.DropDownListFor(x => x.TedarikciId, (List<SelectListItem>)ViewBag.tList, "----------------------- Seçiniz ----------------------", new { @class = "form-control", @style = "width:400px" })
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Ödeme Şekli</label>
-                <div class="col-sm-9">
-                    @Html.DropDownListFor(x => x.OdemeSekliId, (List<SelectListItem>)ViewBag.oList, "---- Seçiniz ----", new { @class = "form-control", @style = "width:150px" })
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
-            <button class="btn btn-info">Ekle</button>
-        </div>
-    </form>
-</div>*@
+        <table id="detailsTable" class="table">
+            <thead>
+                <tr>
+                    <th style="width:30%">Mal/Hizmet</th>
+                    <th style="width:10%">Miktar</th>
+                    <th style="width:10%">Birim</th>
+                    <th style="width:25%">Birim Fiyat</th>
+                    <th style="width:10%">Döviz Cinsi</th>
+                    <th style="width:10%">Kur</th>
+                    <th style="width:25%">Birim Fiyat(TL)</th>
+                    <th style="width:10%">Kdv Oranı(%)</th>
+                    <th style="width:25%">Kdv Tutarı</th>
+                    <th style="width:25%">Tutar</th>
+                    <th style="width:10%"></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="reset" class="btn btn-danger" data-dismiss="modal">Kapat</button>
+    <button id="saveOrder" type="submit" class="btn btn-info">Kaydet</button>
+</div>
+
+
+<script type="text/javascript">
+    //Add Multiple Order.
+    $("#addToList").click(function (e) {
+        e.preventDefault();
+        if ($.trim($("#MalHizmetId").val()) == "" || $.trim($("#FdMiktar").val()) == "" || $.trim($("#BirimId").val()) == "" || $.trim($("#FdBirimFiyat").val()) == "") return;
+        var mhz = document.getElementById('MalHizmetId');
+        var brm = document.getElementById('BirimId');
+        var dvz = document.getElementById('DovizId');
+        var kdv = document.getElementById('KdvId');
+        var MalHizmetId = $("#MalHizmetId").val(),
+            MalHizmetAdi = mhz.options[mhz.selectedIndex].text,
+            Miktar = $("#FdMiktar").val(),
+            BirimId = $("#BirimId").val(),
+            Birim = brm.options[brm.selectedIndex].text,
+            DovizId = $("#DovizId").val(),
+            BirimFiyat = parseFloat($("#FdBirimFiyat").val()),
+            DovizCinsi = dvz.options[dvz.selectedIndex].text,
+            Kur = $("#FdKur").val(),
+            KdvId = $("#KdvId").val(),
+            KdvOrani = kdv.options[kdv.selectedIndex].text,
+            detailsTableBody = $("#detailsTable tbody");
+        var BirimFiyatTl = (BirimFiyat * Kur).toFixed(2);
+        var Tutar = BirimFiyatTl * Miktar;
+        var KdvTutari = ((Tutar * KdvOrani) / 100).toFixed(2);
+
+        var productItem = '<tr><td hidden>' +
+            MalHizmetId + '</td><td>' +
+            MalHizmetAdi + '</td><td>' +
+            Miktar + '</td><td hidden>' +
+            BirimId + '</td><td>' +
+            Birim + '</td><td>' +
+            new Number(BirimFiyat).toLocaleString("tr-TR") + '</td><td hidden>' +
+            DovizId + '</td><td>' +
+            DovizCinsi + '</td><td>' +
+            new Number(Kur).toLocaleString("tr-TR") + '</td><td>' +
+            new Number(BirimFiyatTl).toLocaleString("tr-TR") + '</td><td hidden>' +
+            KdvId + '</td><td>' +
+            KdvOrani + '</td><td class="kdvToplam" style="text-align:right;" >' +
+            new Number(KdvTutari).toLocaleString("tr-TR") + '</td><td class="tutarToplam">' +
+            new Number(Tutar).toLocaleString("tr-TR") +
+            '</td><td><a data-itemId="0" href="#" class="deleteItem">Remove</a></td></tr>';
+        detailsTableBody.append(productItem);
+        clearItem();
+        fatToplam();
+    });
+
+    function fatToplam() {
+        var topTutar = 0;
+        $("#detailsTable tbody tr").each(function () {
+            var oTutar = $(this).find('td:eq(13)').html();
+            //var cTutar = Number(oTutar.replace(/[^0-9.-]+/g,""));
+            var cTutar = (oTutar.replace(/[^0-9,-]+/g, "")).replace(/,/g, '.');
+            //var cTutar = oTutar.replace(/,/g, '.');
+            topTutar += parseFloat(cTutar);
+        });
+        $("#FatToplami").val(topTutar.toFixed(2));
+        var topKdv = 0;
+        $("#detailsTable tbody tr").each(function () {
+            var oKdvTutar = $(this).find('td:eq(12)').html();
+            var cKdvTutar = (oKdvTutar.replace(/[^0-9,-]+/g, "")).replace(/,/g, '.');
+            topKdv += parseFloat(cKdvTutar);
+        });
+        $("#FatKdvToplami").val(topKdv.toFixed(2));
+        var odTutar = (topTutar + topKdv).toFixed(2);
+        $("#FatOdenecekTutar").val(odTutar);
+    }
+
+    //After Add A New Order In The List, Clear Clean The Form For Add More Order.
+
+    function clearItem() {
+        $("#MalHizmetGrupId").val('');
+        $("#MalHizmetId").val('');
+        $("#FdMiktar").val('');
+        $("#BirimAdi").val('');
+        $("#FdBirimFiyat").val('');
+    }
+
+    // After Add A New Order In The List, If You Want, You Can Remove It.
+
+    $(document).on('click', 'a.deleteItem', function (e) {
+        e.preventDefault();
+        var $self = $(this);
+        if ($(this).attr('data-itemId') == "0") {
+            $(this).parents('tr').css("background-color", "#ff6347").fadeOut(800, function () {
+                $(this).remove();
+                fatToplam();
+            });
+        }
+
+    });
+
+    //After Click Save Button Pass All Data View To Controller For Save Database
+
+    function saveOrder(data) {
+        return $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            url: "@Url.Action("FaturaEkle", "Fatura")",
+            data: data,
+            success: function (result) {
+                alert(result);
+                location.reload();
+            },
+            error: function () {
+                alert("Error!")
+            }
+        });
+    }
+
+    //Collect Multiple Order List For Pass To Controller
+
+    $("#saveOrder").click(function (e) {
+        e.preventDefault();
+        var orderArr = [];
+        orderArr.length = 0;
+        $.each($("#detailsTable tbody tr"), function () {
+            var BirimFiyat = (($(this).find('td:eq(5)').html()).replace(/[^0-9,-]+/g, "")).replace(/,/g, '.');
+            var BirimFiyatTl = (($(this).find('td:eq(9)').html()).replace(/[^0-9,-]+/g, "")).replace(/,/g, '.');
+            var Kdv = (($(this).find('td:eq(12)').html()).replace(/[^0-9,-]+/g, "")).replace(/,/g, '.');
+            var Tutar = (($(this).find('td:eq(13)').html()).replace(/[^0-9,-]+/g, "")).replace(/,/g, '.');
+            orderArr.push({
+                MalHizmetId: $(this).find('td:eq(0)').html(),
+                FdMiktar: $(this).find('td:eq(2)').html(),
+                BirimId: $(this).find('td:eq(3)').html(),
+                FdBirimFiyat: parseFloat(BirimFiyat),
+                DovizId: $(this).find('td:eq(6)').html(),
+                FdKur: parseFloat($(this).find('td:eq(8)').html()),
+                FdBirimFiyatTl: parseFloat(BirimFiyatTl),
+                KdvId: $(this).find('td:eq(10)').html(),
+                KdvTutar: parseFloat(Kdv),
+                FdTutar: parseFloat(Tutar)
+            });
+        });
+        var data = JSON.stringify({
+            FatSiraNo: $("#FatSiraNo").val(),
+            FatTarihi: $("#FatTarihi").val(),
+            FatIrsaliyeNo: $('#FatIrsaliyeNo').val(),
+            FatIrsaliyeTarihi: $('#FatIrsaliyeTarihi').val(),
+            FatOnayTarihi: $('#FatOnayTarihi').val(),
+            TedarikciId: $("#TedarikciId").val(),
+            OdemeSekliId: $("#OdemeSekliId").val(),
+            FatToplami: parseFloat($("#FatToplami").val()),
+            FatKdvToplami: parseFloat($("#FatKdvToplami").val()),
+            FatOdenecekTutar: parseFloat($("#FatOdenecekTutar").val()),
+            ProjeId: $("#ProjeId").val(),
+            Detaylar: orderArr
+        });
+        $.when(saveOrder(data)).then(function (response) {
+            console.log(response);
+        }).fail(function (err) {
+            console.log(err);
+        });
+    });
+
+    //Mal/Hizmet grubuna göre Mal/Hizmet getirme
+
+    $(document).ready(function () {
+        $('#MalHizmetGrupId').change(function () {
+            var MhgId = $(this).val();
+            var mhList = $('#MalHizmetId');
+            mhList.empty();
+            $.ajax({
+                url: '@Url.Action("MalHizmetListe", "Fatura")',
+                type: 'POST',
+                dataType: 'json',
+                data: { 'MhgId': MhgId },
+                success: function (data) {
+                    $.each(data, function (index, option) {
+                        mhList.append('<option value=' + option.Value + '>' + option.Text + '</option>');
+                    });
+                }
+            });
+        });
+    });
+</script>
+

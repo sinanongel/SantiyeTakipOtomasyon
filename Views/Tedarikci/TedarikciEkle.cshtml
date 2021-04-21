@@ -1,84 +1,94 @@
 ﻿@model SantiyeTakipOtomasyon.Models.Siniflar.Tedarikci
 
-<div class="container p-2 bg-dark text-white">
-    <form action="@Url.Action("TedarikciEkle", "Tedarikci")" method="post">
-        <div class="modal-header">
-            <h5 class="modal-title">Tedarikçi Girişi</h5>
+<div class="card card-default">
+    <div class="card-header bg-dark">
+        <div class="row">
+            <h5 class="card-title mb-sm-1 col-md-11" style="color:white">
+                <strong>Tedarikçi Girişi</strong>
+            </h5>
         </div>
-        <br />
-        <div style="margin-left:70px">
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label" st>Tedarikçi Kod</label>
-                <div class="col-sm-9">
-                    <input style="width:75px;" type="text" class="form-control" name="TedKod" />
+    </div>
+    <div class="container">
+        <form action="@Url.Action("TedarikciEkle", "Tedarikci")" method="post">
+            <hr />
+            <div class="form-horizontal">
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right" style="color:red"><b>Tedarikçi Kod</b></label>
+                    <div class="col-sm-8">
+                        <input style="width:75px;" type="text" class="form-control" name="TedKod" maxlength="3" required oninvalid="this.setCustomValidity('Bu alan boş geçilemez!')" oninput="setCustomValidity('')" />
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right" style="color:red"><b>Firma/Şahıs</b></label>
+                    <div class="col-sm-9">
+                        <input style="width:400px;" type="text" class="form-control" name="TedFirma" maxlength="75" required oninvalid="this.setCustomValidity('Bu alan boş geçilemez!')" oninput="setCustomValidity('')" />
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right"><b>İlgili Kişi</b></label>
+                    <div class="col-sm-9">
+                        <input style="width:300px;" type="text" class="form-control" name="TedIlgiliKisi" maxlength="30" />
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right" style="color:red"><b>Adres</b></label>
+                    <div class="col-sm-9">
+                        <input style="width:400px;" type="text" class="form-control" name="TedAdres" maxlength="100" required oninvalid="this.setCustomValidity('Bu alan boş geçilemez!')" oninput="setCustomValidity('')" />
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right" style="color:red"><b>İl/İlçe</b></label>
+                    <div class="col-sm-4">
+                        @Html.DropDownListFor(x => x.IllerId, (List<SelectListItem>)ViewBag.iList, "------- Seçiniz -------", new { @class = "form-control", @style = "width:200px", @required="" })
+                    </div>
+                    <div class="col-sm-5">
+                        @Html.DropDownListFor(x => x.IlcelerId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control", @style = "width:260px", @required = "" })
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right"><b>Telefon</b></label>
+                    <div class="col-sm-2">
+                        <input style="width:150px;" type="text" class="form-control" name="TedTelefon" maxlength="11" />
+                    </div>
+                    <label class="col-form-label-sm col-md-3 text-right"><b>Gsm</b></label>
+                    <div class="col-sm-3">
+                        <input style="width:150px;" type="text" class="form-control" name="TedGsm" maxlength="11" />
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right"><b>E-Posta</b></label>
+                    <div class="col-sm-9">
+                        <input style="width:300px;" type="text" class="form-control" name="TedEposta" maxlength="50" />
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right" style="color:red"><b>Tedarik Tür</b></label>
+                    <div class="col-sm-9">
+                        @Html.DropDownListFor(x => x.TedarikturId, (List<SelectListItem>)ViewBag.tList, "------- Seçiniz -------", new { @class = "form-control", @style = "width:200px", @required = "" })
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right"><b>Konu</b></label>
+                    <div class="col-sm-9">
+                        <input style="width:400px;" type="text" class="form-control" name="TedKonu" maxlength="100" />
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
+                    <button class="btn btn-info">Ekle</button>
                 </div>
             </div>
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Firma/Şahıs</label>
-                <div class="col-sm-9">
-                    <input style="width:400px;" type="text" class="form-control" name="TedFirma" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">İlgili Kişi</label>
-                <div class="col-sm-9">
-                    <input style="width:300px;" type="text" class="form-control" name="TedIlgiliKisi" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Adres</label>
-                <div class="col-sm-9">
-                    <input style="width:400px;" type="text" class="form-control" name="TedAdres" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">İl</label>
-                <div class="col-sm-9">
-                    @Html.DropDownListFor(x => x.IllerId, (List<SelectListItem>)ViewBag.iList, "------- Seçiniz -------", new { @class = "form-control", @style = "width:200px" })
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">İlce</label>
-                <div class="col-sm-9">
-                    @Html.DropDownListFor(x => x.IlcelerId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control", @style = "width:260px" })
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Telefon</label>
-                <div class="col-sm-9">
-                    <input style="width:150px;" type="text" class="form-control" name="TedTelefon" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Gsm</label>
-                <div class="col-sm-9">
-                    <input style="width:150px;" type="text" class="form-control" name="TedGsm" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">E-Posta</label>
-                <div class="col-sm-9">
-                    <input style="width:300px;" type="text" class="form-control" name="TedEposta" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Tedarik Tür</label>
-                <div class="col-sm-9">
-                    @Html.DropDownListFor(x => x.TedarikturId, (List<SelectListItem>)ViewBag.tList, "------- Seçiniz -------", new { @class = "form-control", @style = "width:200px" })
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Konu</label>
-                <div class="col-sm-9">
-                    <input style="width:400px;" type="text" class="form-control" name="TedKonu" />
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
-            <button class="btn btn-info">Ekle</button>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -99,4 +109,21 @@
             });
         });
     });
+    //(function () {
+    //    'use strict';
+    //    window.addEventListener('load', function () {
+    //        // Get the forms we want to add validation styles to
+    //        var forms = document.getElementsByClassName('needs-validation');
+    //        // Loop over them and prevent submission
+    //        var validation = Array.prototype.filter.call(forms, function (form) {
+    //            form.addEventListener('submit', function (event) {
+    //                if (form.checkValidity() === false) {
+    //                    event.preventDefault();
+    //                    event.stopPropagation();
+    //                }
+    //                form.classList.add('was-validated');
+    //            }, false);
+    //        });
+    //    }, false);
+    //})();
 </script>

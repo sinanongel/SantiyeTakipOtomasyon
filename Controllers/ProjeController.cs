@@ -45,6 +45,10 @@ namespace SantiyeTakipOtomasyon.Controllers
         [HttpPost]
         public ActionResult ProjeEkle(Proje p)
         {
+            if(p.ProSozlesmeTarihi == null)
+            {
+
+            }
             c.Projes.Add(p);
             c.SaveChanges();
             return RedirectToAction("Index");

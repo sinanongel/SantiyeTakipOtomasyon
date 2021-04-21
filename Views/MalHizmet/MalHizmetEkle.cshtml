@@ -1,0 +1,44 @@
+﻿@model SantiyeTakipOtomasyon.Models.Siniflar.MalHizmet
+
+<div class="card card-default">
+    <div class="card-header bg-dark">
+        <div class="row">
+            <h5 class="card-title mb-sm-1 col-md-11" style="color:white">
+                <strong>Mal/Hizmet Girişi</strong>
+            </h5>
+        </div>
+    </div>
+    <div class="container">
+        <form action="@Url.Action("MalHizmetEkle", "MalHizmet")" method="post">
+            <hr />
+            <div class="form-horizontal">
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-4 text-right" style="color:red"><b>Mal/Hizmet Grubu</b></label>
+                    <div class="col-sm-8">
+                        @Html.DropDownListFor(x => x.MalHizmetGrupId, (List<SelectListItem>)ViewBag.mhListe, "------- Seçiniz -------", new { @class = "form-control", @style = "width:200px", @required = "" })
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-4 text-right" style="color:red"><b>Mal/Hizmet Adı</b></label>
+                    <div class="col-sm-8">
+                        <input style="width:300px;" type="text" class="form-control" name="MalHizmetAdi" maxlength="100" required oninvalid="this.setCustomValidity('Bu alan boş geçilemez!')" oninput="setCustomValidity('')" />
+                    </div>
+                </div>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-4 text-right" style="color:red"><b>Birim</b></label>
+                    <div class="col-sm-8">
+                        @Html.DropDownListFor(x => x.BirimId, (List<SelectListItem>)ViewBag.brmListe, "------- Seçiniz -------", new { @class = "form-control", @style = "width:200px", @required = "" })
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
+                    <button class="btn btn-info">Ekle</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

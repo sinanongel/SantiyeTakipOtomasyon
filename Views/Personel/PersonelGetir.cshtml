@@ -17,21 +17,21 @@
                 <div class="container form-group-sm row">
                     <label class="col-form-label-sm col-md-3 text-right"><b>Adı</b></label>
                     <div class="col-md-3">
-                        @Html.TextBoxFor(x => x.PerAd, new { @class = "form-control", @style = "width:200%;" })
+                        @Html.TextBoxFor(x => x.PerAd, new { @class = "form-control", @style = "width:200%;", @maxlength = "30" })
                     </div>
                 </div>
                 <br />
                 <div class="container form-group-sm row">
                     <label class="col-form-label-sm col-md-3 text-right"><b>Soyadı</b></label>
                     <div class="col-md-3">
-                        @Html.TextBoxFor(x => x.PerSoyad, new { @class = "form-control", @style = "width:200%;" })
+                        @Html.TextBoxFor(x => x.PerSoyad, new { @class = "form-control", @style = "width:200%;", @maxlength = "30" })
                     </div>
                 </div>
                 <br />
                 <div class="container form-group-sm row">
                     <label class="col-form-label-sm col-md-3 text-right"><b>Adres</b></label>
                     <div class="col-md-3">
-                        @Html.TextBoxFor(x => x.PerAdres, new { @class = "form-control", @style = "width:200%;" })
+                        @Html.TextBoxFor(x => x.PerAdres, new { @class = "form-control", @style = "width:200%;", @maxlength = "100" })
                     </div>
                 </div>
                 <br />
@@ -48,7 +48,7 @@
                 <div class="container form-group-sm row">
                     <label class="col-form-label-sm col-md-3 text-right"><b>Telefon</b></label>
                     <div class="col-md-3">
-                        @Html.TextBoxFor(x => x.PerTelefon, new { @class = "form-control", @style = "width:100%;" })
+                        @Html.TextBoxFor(x => x.PerTelefon, new { @class = "form-control", @style = "width:100%;", @maxlength = "11" })
                     </div>
                 </div>
                 <br />
@@ -69,7 +69,7 @@
                 <div class="container form-group-sm row">
                     <label class="col-form-label-sm col-md-3 text-right"><b>Görevi</b></label>
                     <div class="col-md-2">
-                        @Html.TextBoxFor(x => x.PerGorev, new { @class = "form-control", @style = "width:300%;" })
+                        @Html.TextBoxFor(x => x.PerGorev, new { @class = "form-control", @style = "width:300%;", @maxlength = "30" })
                     </div>
                 </div>
                 <br />

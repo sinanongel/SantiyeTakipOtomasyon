@@ -8,16 +8,15 @@ using SantiyeTakipOtomasyon.Models.Siniflar;
 
 namespace SantiyeTakipOtomasyon.Controllers
 {
+    [AllowAnonymous] //Tüm kullanıcıların login sayfasına ulaşabilmesi için
     public class LoginController : Controller
     {
         SantiyeTakipDBContext c = new SantiyeTakipDBContext();
         // GET: Login
-        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
         }
-        [AllowAnonymous]
         [HttpPost]
         public ActionResult Index(Kullanici p)
         {

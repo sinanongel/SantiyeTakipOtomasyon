@@ -14,28 +14,28 @@
             <input hidden id="ProjeId" name="ProjeId" value="@ViewBag.projeId" />
             <div class="form-horizontal">
                 <div class="container form-group-sm row">
-                    <label class="col-form-label-sm col-md-3 text-right"><b>Adı</b></label>
+                    <label class="col-form-label-sm col-md-3 text-right" style="color:red"><b>Adı</b></label>
                     <div class="col-md-3">
-                        <input type="text" id="PerAd" name="PerAd" placeholder="Personel Adını Giriniz" class="form-control" style="width:200%;" />
+                        <input type="text" id="PerAd" name="PerAd" placeholder="Personel Adını Giriniz" class="form-control" style="width:200%;" maxlength="30" required oninvalid="this.setCustomValidity('Bu alan boş geçilemez!')" oninput="setCustomValidity('')" />
                     </div>
                 </div>
                 <br />
                 <div class="container form-group-sm row">
-                    <label class="col-form-label-sm col-md-3 text-right"><b>Soyadı</b></label>
+                    <label class="col-form-label-sm col-md-3 text-right" style="color:red"><b>Soyadı</b></label>
                     <div class="col-md-3">
-                        <input type="text" id="PerSoyad" name="PerSoyad" placeholder="Personel Soyadını Giriniz" class="form-control" style="width:200%;" />
+                        <input type="text" id="PerSoyad" name="PerSoyad" placeholder="Personel Soyadını Giriniz" class="form-control" style="width:200%;" maxlength="30" required oninvalid="this.setCustomValidity('Bu alan boş geçilemez!')" oninput="setCustomValidity('')" />
                     </div>
                 </div>
                 <br />
                 <div class="container form-group-sm row">
-                    <label class="col-form-label-sm col-md-3 text-right"><b>Adres</b></label>
+                    <label class="col-form-label-sm col-md-3 text-right" style="color:red"><b>Adres</b></label>
                     <div class="col-md-3">
-                        <input type="text" id="PerAdres" name="PerAdres" placeholder="Adres Bilgilerini Giriniz" class="form-control" style="width:200%;" />
+                        <input type="text" id="PerAdres" name="PerAdres" placeholder="Adres Bilgilerini Giriniz" class="form-control" style="width:200%;" maxlength="100" required oninvalid="this.setCustomValidity('Bu alan boş geçilemez!')" oninput="setCustomValidity('')" />
                     </div>
                 </div>
                 <br />
                 <div class="container form-group-sm row">
-                    <label class="col-form-label-sm col-md-3 text-right"><b>İl/İlçe</b></label>
+                    <label class="col-form-label-sm col-md-3 text-right" style="color:red"><b>İl/İlçe</b></label>
                     <div class="col-md-4">
                         @Html.DropDownListFor(x => x.IllerId, (List<SelectListItem>)ViewBag.iList, "------- Seçiniz -------", new { @class = "form-control", @style = "width:100%" })
                     </div>
@@ -45,23 +45,23 @@
                 </div>
                 <br />
                 <div class="container form-group-sm row">
-                    <label class="col-form-label-sm col-md-3 text-right"><b>Telefon</b></label>
+                    <label class="col-form-label-sm col-md-3 text-right" style="color:red"><b>Telefon</b></label>
                     <div class="col-md-3">
-                        <input type="text" id="PerTelefon" name="PerTelefon" placeholder="Telefonu Giriniz" class="form-control" style="width:100%;" />
+                        <input type="text" id="PerTelefon" name="PerTelefon" placeholder="Telefonu Giriniz" class="form-control" style="width:100%;" maxlength="11" required oninvalid="this.setCustomValidity('Bu alan boş geçilemez!')" oninput="setCustomValidity('')" />
                     </div>
                 </div>
                 <br />
                 <div class="container form-group-sm row">
-                    <label class="col-form-label-sm col-md-3 text-right"><b>İşe Giriş Tarihi</b></label>
+                    <label class="col-form-label-sm col-md-3 text-right" style="color:red"><b>İşe Giriş Tarihi</b></label>
                     <div class="col-md-2">
                         <input type="date" id="PerIseGirisTarihi" name="PerIseGirisTarihi" class="form-control" style="width:180%;" />
                     </div>
                 </div>
                 <br />
                 <div class="container form-group-sm row">
-                    <label class="col-form-label-sm col-md-3 text-right"><b>Görevi</b></label>
+                    <label class="col-form-label-sm col-md-3 text-right" style="color:red"><b>Görevi</b></label>
                     <div class="col-md-2">
-                        <input type="text" id="PerGorev" name="PerGorev" class="form-control" style="width:300%;" />
+                        <input type="text" id="PerGorev" name="PerGorev" class="form-control" style="width:300%;" maxlength="30" required oninvalid="this.setCustomValidity('Bu alan boş geçilemez!')" oninput="setCustomValidity('')" />
                     </div>
                 </div>
                 <br />

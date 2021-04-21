@@ -1,96 +1,130 @@
 ﻿@model SantiyeTakipOtomasyon.Models.Siniflar.FaturaDetay
 
-<div class="container p-2 bg-dark text-white">
-    <form action="@Url.Action("FaturaDetayGuncelle", "Fatura")" method="post">
-        <div class="modal-header">
-            <h5 class="modal-title">Fatura Detay Güncelle</h5>
+<div class="card card-default">
+    <div class="card-header bg-dark">
+        <div class="row">
+            <h5 class="card-title mb-sm-1 col-md-11" style="color:white">
+                <strong>Fatura Detay Güncelleme</strong>
+            </h5>
         </div>
-        <br />
-        <div style="margin-left:70px">
+    </div>
+    <div class="container">
+        <form action="@Url.Action("FaturaDetayGuncelle", "Fatura")" method="post">
+            <hr />
             <div class="form-horizontal">
                 @Html.HiddenFor(x => x.FaturaId, new { @value = ViewBag.faturaId })
                 @Html.HiddenFor(x => x.FaturaDetayId)
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label" st>Mal/Hizmet</label>
-                    <div class="col-sm-9">
-                        @Html.TextBoxFor(x => x.FdCinsi, new { @class = "form-control", @style = "width:400px;" })
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right" st>Mal-Hizmet Grup/Adı</label>
+                    <div class="col-sm-2">
+                        @Html.DropDownList("selection1", (List<SelectListItem>)ViewBag.mhgList, new { @class = "form-control", @style = "width:150px", @name = "MalHizmetGrupId", @id = "MalHizmetGrupId" })
+                    </div>
+                    <div class="col-sm-5">
+                        @Html.DropDownListFor(x => x.MalHizmetId, (List<SelectListItem>)ViewBag.mhList, new { @class = "form-control", @style = "width:400px", @name = "MalHizmetId", @id = "MalHizmetId" })
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Miktar</label>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right">Miktar</label>
                     <div class="col-sm-2">
-                        @Html.TextBoxFor(x => x.FdMiktar, new { @class = "form-control", @style = "width:70px; text-align:right;", @type = "number", @id = "FdMktr" })
+                        @Html.TextBoxFor(x => x.FdMiktar, new { @class = "form-control hesapla", @style = "width:70px; text-align:right;", @type = "number", @id = "FdMiktar" })
                     </div>
                     <div class="col-sm-7">
                         @Html.DropDownListFor(x => x.BirimId, (List<SelectListItem>)ViewBag.bList, new { @class = "form-control", @style = "width:100px" })
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Birim Fiyat</label>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right">Birim Fiyat</label>
                     <div class="col-sm-2">
-                        @Html.TextBoxFor(x => x.FdBirimFiyat, new { @class = "form-control", @style = "width:100px; text-align:right;", @id = "FdBrmFiyat" })
+                        @Html.TextBoxFor(x => x.FdBirimFiyat, new { @class = "form-control hesapla", @style = "width:100px; text-align:right;", @id = "FdBirimFiyat" })
                     </div>
                     <div class="col-sm-2">
                         @Html.DropDownListFor(x => x.DovizId, (List<SelectListItem>)ViewBag.dList, new { @class = "form-control", @style = "width:90px" })
                     </div>
-                    <label class="col-sm-1 col-form-label">Kur</label>
+                    <label class="col-form-label-sm col-md-1 text-right">Kur</label>
                     <div class="col-sm-4">
-                        @Html.TextBoxFor(x => x.FdKur, new { @class = "form-control", @style = "width:70px; text-align:right;", @id = "Kr" })
+                        @Html.TextBoxFor(x => x.FdKur, new { @class = "form-control hesapla", @style = "width:70px; text-align:right;", @id = "Kr" })
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Birim Fiyat(TL)</label>
+                <br />
+                <div class="container form-group-sm row">
+                    <label class="col-form-label-sm col-md-3 text-right">Birim Fiyat(TL)</label>
                     <div class="col-sm-3">
-                        @Html.TextBoxFor(x => x.FdBirimFiyatTl, new { @class = "form-control", @style = "width:100px; text-align:right;", @id = "FdBrmFiyatTl", @readonly = "readonly" })
+                        @Html.TextBoxFor(x => x.FdBirimFiyatTl, new { @class = "form-control", @style = "width:100px; text-align:right;", @id = "FdBirimFiyatTl", @readonly = "readonly" })
                     </div>
-                    <label class="col-sm-2 col-form-label">Kdv Oran(%)</label>
+                    <label class="col-form-label-sm col-md-2 text-right">Kdv Oran(%)</label>
                     <div class="col-sm-4">
-                        @Html.DropDownListFor(x => x.KdvId, (List<SelectListItem>)ViewBag.kList, new { @class = "form-control", @style = "width:80px; text-align:right;", @id = "FKdvId" })
+                        @Html.DropDownListFor(x => x.KdvId, (List<SelectListItem>)ViewBag.kList, new { @class = "form-control hesapla", @style = "width:80px; text-align:right;", @id = "KdvId", @name = "KdvId" })
+                    </div>
+                </div>
+                <br />
+                <div class="form-group row">
+                    <label class="col-form-label-sm col-md-3 text-right">Kdv Tutar</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(x => x.KdvTutar, new { @class = "form-control", @style = "width:100px; text-align:right;", @id = "KdvTutar", @name = "KdvTutar", @readonly = "readonly" })
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Kdv Tutar</label>
+                    <label class="col-form-label-sm col-md-3 text-right">Tutar</label>
                     <div class="col-sm-9">
-                        @Html.TextBoxFor(x => x.KdvTutar, new { @class = "form-control", @style = "width:100px; text-align:right;", @id = "FdKdvTutar", @readonly = "readonly" })
+                        @Html.TextBoxFor(x => x.FdTutar, new { @class = "form-control", @style = "width:100px; text-align:right;", @id = "FdTutar", @name = "FdTutar" })
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Tutar</label>
-                    <div class="col-sm-9">
-                        @Html.TextBoxFor(x => x.FdTutar, new { @class = "form-control", @style = "width:100px; text-align:right;", @id = "FdTtr", @readonly = "readonly" })
-                    </div>
-                </div>
+                <br />
             </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
-            <button class="btn btn-success">Güncelle</button>
-        </div>
-    </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
+                <button class="btn btn-success">Güncelle</button>
+            </div>
+        </form>
+    </div>
 </div>
-
 <script type="text/javascript">
-    function hesapla() {
-        var BirimFiyat = document.getElementById("FdBrmFiyat").value;
-        var BrmFiyat = BirimFiyat.replace(/,/g, '.');
-        var Kur = document.getElementById("Kr").value;
-        var Kr = Kur.replace(/,/g, '.');
-        var Miktar = document.getElementById("FdMktr").value;
-        var KdvOran = $("#FKdvId option:selected").text();
+    $(document).ready(function () {
+        $('.hesapla').change(function () {
+            var BirimFiyat = document.getElementById("FdBirimFiyat").value;
+            var BrmFiyat = (BirimFiyat.replace(/[^0-9,-]+/g, "")).replace(/,/g, '.');
+            var Kur = document.getElementById("Kr").value;
+            var Kr = Kur.replace(/,/g, '.');
+            var Miktar = document.getElementById("FdMiktar").value;
+            var KdvOran = $("#KdvId option:selected").text();
 
-        var BirimFiyatTl = (parseFloat(BrmFiyat) * parseFloat(Kr)).toFixed(2);
-        var Tutar = BirimFiyatTl * Miktar;
-        var KdvTutar = ((Tutar * KdvOran) / 100).toFixed(2);
+            alert(BrmFiyat);
 
-        var BrmFiyatTl = new Number(BirimFiyatTl).toLocaleString("tr-TR");
-        var Ttr = new Number(Tutar).toLocaleString("tr-TR");
-        var Kdvttr = new Number(KdvTutar).toLocaleString("tr-TR");
+            var BirimFiyatTl = (parseFloat(BrmFiyat) * parseFloat(Kr)).toFixed(2);
+            var Tutar = BirimFiyatTl * Miktar;
+            var KdvTutar = ((Tutar * KdvOran) / 100).toFixed(2);
 
-        document.getElementById("FdBrmFiyatTl").value;
-        $("#FdBrmFiyatTl").val(BrmFiyatTl);
-        $("#FdTtr").val(Ttr);
-        $("#FdKdvTutar").val(Kdvttr);
-    }
-    setInterval("hesapla()", 100);
+            var BrmFiyatTl = new Number(BirimFiyatTl).toLocaleString("tr-TR");
+            var Ttr = new Number(Tutar).toLocaleString("tr-TR");
+            var Kdvttr = new Number(KdvTutar).toLocaleString("tr-TR");
+
+            document.getElementById("FdBirimFiyatTl").value;
+            $("#FdBirimFiyatTl").val(BrmFiyatTl);
+            $("#FdTutar").val(Ttr);
+            $(".FdKdvTutar").val(Kdvttr);
+    });
+
+    //Mal/Hizmet grubuna göre Mal/Hizmet getirme
+
+    $(document).ready(function () {
+        $('#MalHizmetGrupId').change(function () {
+            var MhgId = $(this).val();
+            var mhList = $('#MalHizmetId');
+            mhList.empty();
+            $.ajax({
+                url: '@Url.Action("MalHizmetListe", "Fatura")',
+                type: 'POST',
+                dataType: 'json',
+                data: { 'MhgId': MhgId },
+                success: function (data) {
+                    $.each(data, function (index, option) {
+                        mhList.append('<option value=' + option.Value + '>' + option.Text + '</option>');
+                    });
+                }
+            });
+        });
+    });
 </script>
 

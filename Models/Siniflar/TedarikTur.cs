@@ -13,7 +13,7 @@ namespace SantiyeTakipOtomasyon.Models.Siniflar
         public int TedarikTurId { get; set; }
 
         [Column(TypeName = "Varchar")]
-        [StringLength(20)]
+        [StringLength(100)]
         public string TurAd { get; set; }
         public ICollection<Tedarikci> Tedarikcis { get; set; }
     }

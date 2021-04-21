@@ -175,10 +175,12 @@
     <Compile Include="Controllers\FaturaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MalHizmetController.cs" />
     <Compile Include="Controllers\OdemeController.cs" />
     <Compile Include="Controllers\PersonelController.cs" />
     <Compile Include="Controllers\ProjeController.cs" />
     <Compile Include="Controllers\ProjeSecimController.cs" />
+    <Compile Include="Controllers\RaporFaturaController.cs" />
     <Compile Include="Controllers\TedarikciController.cs" />
     <Compile Include="Controllers\TedarikTurController.cs" />
     <Compile Include="Global.asax.cs">
@@ -188,6 +190,8 @@
     <Compile Include="Models\Siniflar\Aylar.cs" />
     <Compile Include="Models\Siniflar\Birim.cs" />
     <Compile Include="Models\Siniflar\CalismaDurum.cs" />
+    <Compile Include="Models\Siniflar\Dosya.cs" />
+    <Compile Include="Models\Siniflar\DosyaTuru.cs" />
     <Compile Include="Models\Siniflar\Doviz.cs" />
     <Compile Include="Models\Siniflar\Fatura.cs" />
     <Compile Include="Models\Siniflar\FaturaDetay.cs" />
@@ -197,6 +201,8 @@
     <Compile Include="Models\Siniflar\IzinTuru.cs" />
     <Compile Include="Models\Siniflar\Kdv.cs" />
     <Compile Include="Models\Siniflar\Kullanici.cs" />
+    <Compile Include="Models\Siniflar\MalHizmet.cs" />
+    <Compile Include="Models\Siniflar\MalHizmetGrup.cs" />
     <Compile Include="Models\Siniflar\Odeme.cs" />
     <Compile Include="Models\Siniflar\OdemeSekli.cs" />
     <Compile Include="Models\Siniflar\OdemeTuru.cs" />
@@ -211,6 +217,7 @@
     <Compile Include="Models\Siniflar\Tedarikci.cs" />
     <Compile Include="Models\Siniflar\TedarikTur.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Roller\KullaniciRol.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -377,11 +384,14 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\login-yeni.css" />
+    <Content Include="Content\toplama.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\logoKalemci.jpg" />
+    <Content Include="Scripts\all.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
@@ -461,6 +471,10 @@
     <Content Include="Scripts\DataTables\responsive.semanticui.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\jquery-3.5.1.js" />
+    <Content Include="Scripts\jszip.min.js" />
+    <Content Include="Scripts\pdfmake.min.js" />
+    <Content Include="Scripts\vfs_fonts.js" />
     <Content Include="Web\.gitignore" />
     <Content Include="Web\dist\401.html" />
     <Content Include="Web\dist\404.html" />
@@ -503,6 +517,11 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -607,9 +626,17 @@
     <Content Include="Views\Odeme\OdemeEkle.cshtml" />
     <Content Include="Views\Odeme\OdemeGetir.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Fatura\ProjeSecim.cshtml" />
+    <Content Include="Views\Fatura\DosyaYukle.cshtml" />
+    <Content Include="Views\Fatura\DosyaListele.cshtml" />
+    <Content Include="Views\MalHizmet\Index.cshtml" />
+    <Content Include="Views\MalHizmet\MalHizmetEkle.cshtml" />
+    <Content Include="Views\MalHizmet\MalHizmetGetir.cshtml" />
+    <Content Include="Views\RaporFatura\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Dosya\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

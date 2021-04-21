@@ -4,50 +4,70 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
+<br>
 
-<table class="table table-bordered" style="margin-top:20px">
-    <tr>
-        <th>ID</th>
-        <th>TÜR ADI</th>
-        <th>SİL</th>
-        <th>GÜNCELLE</th>
-    </tr>
-    @foreach (var t in Model)
-    {
-        <tr>
-            <td>@t.TedarikTurId</td>
-            <td>@t.TurAd</td>
-            <td><a href="@Url.Action("TedarikTurSil", "TedarikTur")/@t.TedarikTurId" class="btn btn-danger">Sil</a></td>
-            <td><a href="#" class="btn btn-success guncelle" data-target="@Url.Action("TedarikTurGetir", "TedarikTur")/@t.TedarikTurId">Güncelle</a></td>
-        </tr>
-    }
-</table>
-<a href="#" class="btn btn-primary ekle" data-target="@Url.Action("ModalAc", "TedarikTur")">Yeni Kayıt</a>
+<div class="card card-default">
+    <div class="card-header">
+        <div class="row">
+            <h5 class="card-title mb-sm-1 col-md-11">
+                <strong>Tedarik Tür İşlemleri</strong>
+            </h5>
+            <a href="#" class="btn btn-primary ekle col-md-1" data-target="@Url.Action("ModalAc", "TedarikTur")">Yeni Kayıt</a>
+        </div>
+    </div>
 
-<div class="container">
-    <!--Modal -->
-    <div class="modal fade" id="myModalE" role="dialog">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
+    <div style="margin-left:1%; margin-right:1%">
+        <br />
+        <table id="liste" class="table table-bordered table-hover table-sm" style="margin-top:20px">
+            <thead>
+                <tr>
+                    <th style="width:3%">Id</th>
+                    <th style="width:90%">Tür Adı</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            @foreach (var t in Model)
+            {
+                <tr>
+                    <td>@t.TedarikTurId</td>
+                    <td>@t.TurAd</td>
+                    <td><a href="@Url.Action("TedarikTurSil", "TedarikTur")/@t.TedarikTurId" class="btn btn-danger btn-sm">Sil</a></td>
+                    <td><a href="#" class="btn btn-success btn-sm guncelle" data-target="@Url.Action("TedarikTurGetir", "TedarikTur")/@t.TedarikTurId">Güncelle</a></td>
+                </tr>
+            }
+        </table>
+    </div>
 
+    <div class="container">
+        <!--Modal -->
+        <div class="modal fade" id="myModalE" role="dialog">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <!--Modal -->
+        <div class="modal fade" id="myModalG" role="dialog">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="container">
-    <!--Modal -->
-    <div class="modal fade" id="myModalG" role="dialog">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
 
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+<script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
     $(function () {
@@ -77,5 +97,13 @@
                     $("#myModalG").modal("show");
                 })
         });
+    });
+
+    $('#liste').DataTable({
+        "language": {
+
+            "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Turkish.json"
+
+        }
     });
 </script>

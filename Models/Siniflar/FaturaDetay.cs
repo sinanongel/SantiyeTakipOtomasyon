@@ -11,10 +11,6 @@ namespace SantiyeTakipOtomasyon.Models.Siniflar
     {
         [Key]
         public int FaturaDetayId { get; set; }
-
-        [Column(TypeName = "Varchar")]
-        [StringLength(100)]
-        public string FdCinsi { get; set; }
         public int FdMiktar { get; set; }
         public decimal FdBirimFiyat { get; set; }
         public decimal FdKur { get; set; }
@@ -34,5 +30,7 @@ namespace SantiyeTakipOtomasyon.Models.Siniflar
         public virtual Kdv Kdv { get; set; }
         public int DovizId { get; set; }
         public virtual Doviz Doviz { get; set; }
+        public int? MalHizmetId { get; set; }
+        public virtual MalHizmet MalHizmet { get; set; }
     }
 }

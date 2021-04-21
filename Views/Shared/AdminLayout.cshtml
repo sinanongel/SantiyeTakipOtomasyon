@@ -14,8 +14,10 @@
     <title>Proje Takip Otomasyonu - SB Admin</title>
     <link href="~/web/dist/css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/Scripts/all.min.js"></script>
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">*@
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>*@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -23,9 +25,11 @@
 </head>
 <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand" href="index.html">Proje Takip</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#">
+        <a class="navbar-brand" href="index.html">Proje Takip</a>
+        <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#">
             <i class="fas fa-bars"></i>
-        </button><!-- Navbar Search-->
+        </button>
+        <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
             <div class="input-group">
                 <input class="form-control" type="text" placeholder="Aranacak kelimeyi girin..." aria-label="Search" aria-describedby="basic-addon2" />
@@ -42,7 +46,7 @@
                     <a class="dropdown-item" href="#">Ayarlar</a>
                     <a class="dropdown-item" href="#">Hesabım</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="login.html">Çıkış</a>
+                    <a class="dropdown-item" href="@Url.Action("Index", "Login")">Çıkış</a>
                 </div>
             </li>
         </ul>
@@ -52,76 +56,85 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Tanımlamalar</div>
-                        <a class="nav-link" href="@Url.Action("Index", "TedarikTur")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-sitemap"></i></div>
-                            Tedarik Tür
-                        </a>
-                        <a class="nav-link" href="@Url.Action("Index", "Tedarikci")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-industry"></i></div>
-                            Tedarikçi
-                        </a>
-                        <a class="nav-link" href="@Url.Action("Index", "Proje")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-calendar"></i></div>
-                            Proje
-                        </a>
-                        <div class="sb-sidenav-menu-heading">Interface</div>
-                        <a class="nav-link proje" href="" data-toggle="modal" data-target="@Url.Action("Index", "Fatura")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-file"></i></div>
-                            Fatura
-                        </a>
-                        <a class="nav-link odeme" href="" data-toggle="modal" data-target="@Url.Action("ProjeSecim", "Odeme")">
-                            <div class="sb-nav-link-icon"><i class="fa fa-credit-card"></i></div>
-                            Ödemeler
-                        </a>
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
-                            Personel
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link personel" href="" data-toggle="modal" data-target="@Url.Action("ProjeSecim", "Personel")">Personel Giriş</a>
-                                <a class="nav-link" href="layout-sidenav-light.html">İzin Giriş</a>
-                                <a class="nav-link puantaj" href="#" data-toggle="modal" data-target="@Url.Action("PuantajProjeSecim", "Personel")">Puantaj</a>
-                            </nav>
-                        </div>
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            Pages
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                    Authentication
+                        @if (User.IsInRole("G"))
+                        {
+                            <div class="sb-sidenav-menu-heading">Tanımlamalar</div>
+                            <a class="nav-link" href="@Url.Action("Index", "TedarikTur")">
+                                <div class="sb-nav-link-icon"><i class="fas fa-sitemap"></i></div>
+                                Tedarik Tür
+                            </a>
+                            <a class="nav-link" href="@Url.Action("Index", "MalHizmet")">
+                                <div class="sb-nav-link-icon"><i class="fas fa-cubes"></i></div>
+                                Mal/Hizmet
+                            </a>
+                            <a class="nav-link" href="@Url.Action("Index", "Tedarikci")">
+                                <div class="sb-nav-link-icon"><i class="fas fa-industry"></i></div>
+                                Tedarikçi
+                            </a>
+                            <a class="nav-link" href="@Url.Action("Index", "Proje")">
+                                <div class="sb-nav-link-icon"><i class="fas fa-calendar"></i></div>
+                                Proje
+                            </a>
+                            <div class="sb-sidenav-menu-heading">İşlemler</div>
+                            <a class="nav-link fatura" href="" data-toggle="modal" data-target="@Url.Action("ProjeSecim", "Fatura")">
+                                <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>
+                                Fatura
+                            </a>
+                            <a class="nav-link odeme" href="" data-toggle="modal" data-target="@Url.Action("ProjeSecim", "Odeme")">
+                                <div class="sb-nav-link-icon"><i class="fa fa-credit-card"></i></div>
+                                Ödemeler
+                            </a>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                                Personel
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link personel" href="" data-toggle="modal" data-target="@Url.Action("ProjeSecim", "Personel")">Personel Giriş</a>
+                                    @*<a class="nav-link" href="layout-sidenav-light.html">İzin Giriş</a>
+                                        <a class="nav-link puantaj" href="#" data-toggle="modal" data-target="@Url.Action("PuantajProjeSecim", "Personel")">Puantaj</a>*@
+                                </nav>
+                            </div>
+                            @*<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                    Raporlar
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                 </a>
-                                <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="login.html">Login</a><a class="nav-link" href="register.html">Register</a><a class="nav-link" href="password.html">Forgot Password</a></nav>
-                                </div>
-                                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                    Error
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="401.html">401 Page</a><a class="nav-link" href="404.html">404 Page</a><a class="nav-link" href="500.html">500 Page</a></nav>
-                                </div>
-                            </nav>
-                        </div>
-                        <div class="sb-sidenav-menu-heading">Addons</div>
-                        <a class="nav-link" href="charts.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Charts
-                        </a><a class="nav-link" href="tables.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Tables
-                        </a>
+                                <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                        <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                            Fatura Rapor
+                                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                        </a>
+                                        <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
+                                            <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="login.html">Login</a><a class="nav-link" href="register.html">Register</a><a class="nav-link" href="password.html">Forgot Password</a></nav>
+                                        </div>
+                                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                                            Error
+                                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                        </a>
+                                        <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
+                                            <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="401.html">401 Page</a><a class="nav-link" href="404.html">404 Page</a><a class="nav-link" href="500.html">500 Page</a></nav>
+                                        </div>
+                                    </nav>
+                                </div>*@
+                            <div class="sb-sidenav-menu-heading">Raporlar</div>
+                            <a class="nav-link" href="@Url.Action("Index", "RaporFatura")">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Fatura Rapor
+                            </a>
+                            @*<a class="nav-link" href="tables.html">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                    Tables
+                                </a>*@
+                        }
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
-                    <div class="small">Logged in as:</div>
-                    Start Bootstrap
+                    <div class="small">Giriş Yapan Kullanıcı:</div>
+                    @User.Identity.Name
+                    @*Start Bootstrap*@
                 </div>
             </nav>
         </div>
@@ -132,8 +145,8 @@
                         @RenderBody()
 
                         <div class="container">
-                            <!--Puantaj Proje Modal -->
-                            <div class="modal fade" id="proje" role="dialog">
+                            <!--Fatura Proje Modal -->
+                            <div class="modal fade" id="faturaModal" role="dialog">
                                 <div class="modal-dialog modal-lg modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-body">
@@ -158,9 +171,9 @@
                             </div>
                         </div>
 
-                        <div class="container">
-                            <!--Puantaj Proje Modal -->
-                            <div class="modal fade" id="puantajModal" role="dialog">
+                        <!--div class="container">-->
+                        <!--Puantaj Proje Modal -->
+                        <!--<div class="modal fade" id="puantajModal" role="dialog">
                                 <div class="modal-dialog modal-lg modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-body">
@@ -169,10 +182,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
 
                         <div class="container">
-                            <!--Puantaj Proje Modal -->
+                            <!--Ödeme Proje Modal -->
                             <div class="modal fade" id="odemeModal" role="dialog">
                                 <div class="modal-dialog modal-lg modal-dialog-centered">
                                     <div class="modal-content">
@@ -191,33 +204,36 @@
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid">
                     <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website 2019</div>
-                        <div>
-                            <a href="#">Privacy Policy</a>
-                            &middot;
-                            <a href="#">Terms &amp; Conditions</a>
-                        </div>
+                        <div class="text-muted">Copyright &copy; Sinan Öngel 2021</div>
+                        @*<div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>*@
                     </div>
                 </div>
             </footer>
+
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+
+    @*<script src="//code.jquery.com/jquery-1.12.4.js"></script>*@
+    @*<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>*@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="~/web/dist/js/scripts.js"></script>
 
     <script type="text/javascript">
         $(function () {
-            $("body").on("click", ".proje", function () {
+            $("body").on("click", ".fatura", function () {
                 var url = $(this).data("target");
                 $.post(url, function (data) { })
                     .done(function (data) {
-                        $("#personelModal .modal-body").html(data);
-                        $("#personelModal").modal("show");
+                        $("#faturaModal .modal-body").html(data);
+                        $("#faturaModal").modal("show");
                     })
                     .fail(function () {
-                        $("#personelModal .modal-body").text("Hata!!");
-                        $("#personelModal").modal("show");
+                        $("#faturaModal .modal-body").text("Hata!!");
+                        $("#faturaModal").modal("show");
                     })
             });
         });
@@ -236,20 +252,20 @@
             });
         });
 
-        $(function () {
-            $("body").on("click", ".puantaj", function () {
-                var url = $(this).data("target");
-                $.post(url, function (data) { })
-                    .done(function (data) {
-                        $("#puantajModal .modal-body").html(data);
-                        $("#puantajModal").modal("show");
-                    })
-                    .fail(function () {
-                        $("#puantajModal .modal-body").text("Hata!!");
-                        $("#puantajModal").modal("show");
-                    })
-            });
-        });
+        //$(function () {
+        //    $("body").on("click", ".puantaj", function () {
+        //        var url = $(this).data("target");
+        //        $.post(url, function (data) { })
+        //            .done(function (data) {
+        //                $("#puantajModal .modal-body").html(data);
+        //                $("#puantajModal").modal("show");
+        //            })
+        //            .fail(function () {
+        //                $("#puantajModal .modal-body").text("Hata!!");
+        //                $("#puantajModal").modal("show");
+        //            })
+        //    });
+        //});
 
         $(function () {
             $("body").on("click", ".odeme", function () {
